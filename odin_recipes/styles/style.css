@@ -1,0 +1,29 @@
+.centered{
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+}
+.instructions{
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+ul{
+    list-style: none;
+}
+
+#nav{
+    padding-inline-start: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+.process{
+    max-width: 720px;
+    margin: 0 auto;
+}
+footer{
+    text-align: center;
+}
