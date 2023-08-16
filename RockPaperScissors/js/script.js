@@ -1,11 +1,11 @@
-let computerSelection = getComputerChoice(getRandInt());
-let playerSelection = ""
+let computerSelection = "";
+let playerSelection = "";
 
-function getRandInt(){
+const getRandInt =  () => {
     return Math.floor(Math.random()* 3);
 }
 
-function getComputerChoice(num) {
+const getComputerChoice = (num) => {
     if(num<1){
         return "rock";
     }else if(num>1){
@@ -14,7 +14,7 @@ function getComputerChoice(num) {
     return "scissors";
 }
 
-function winSituation(computer, player){
+const winSituation = (computer, player) => {
     if((computer === "rock" && player === "paper") || 
     (computer === "paper" && player === "scissors") || 
     (computer === "scissors" && player === "rock")){
@@ -25,15 +25,22 @@ function winSituation(computer, player){
     return "You lose, " + computer + " beats " + player + ".";
 }
 
-function getPlayerSelection(){
+const getPlayerSelection = () => {
     let userInput = prompt("Do you choose rock, paper, or scissors?");
-    userInput = userInput.toLowerCase().trim();
-    console.log(userInput)
-    return invalidEntry(userInput)? getPlayerSelection() : userInput;
+    return userInput.toLowerCase().trim();
 }
 
-function setPlayerSelection(userInput){
-    playerSelection = userInput;
+const setPlayerSelection = () => {
+    playerSelection = getPlayerSelection();
+}
+const setComputerSelection = () => {
+    computerSelection = getComputerChoice(getRandInt());
+}
+
+const playRound = () => {
+    setComputerSelection();
+    setPlayerSelection();
+    winSituation();
 }
 
 
