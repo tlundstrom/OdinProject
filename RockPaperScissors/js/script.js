@@ -38,11 +38,21 @@ const winSituation = (computer, player) => {
     }
 }
 
+const setResult = () =>{
+
+    document
+        .getElementById("result")
+        .innerHTML = '<p>'+ winSituation(computerSelection, playerSelection) + '</p>';
+
+}
+
 const playRound = (string) => {
     setComputerSelection();
     setPlayerSelection(string);
-    alert(winSituation(computerSelection, playerSelection));
+    setResult();
 }
+
+
 
 
 
