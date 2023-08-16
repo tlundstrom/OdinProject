@@ -1,0 +1,13 @@
+div{
+    display: inline-block;
+}
+
+.button-wrapper{
+    margin: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+.result-wrapper{
+    display: flex;
+    justify-content: center;
+}

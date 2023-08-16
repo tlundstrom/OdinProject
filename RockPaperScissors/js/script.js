@@ -19,13 +19,11 @@ const getPlayerSelection = () => {
     return userInput.toLowerCase().trim();
 }
 
-const setPlayerSelection = () => {
-    playerSelection = getPlayerSelection();
-    console.log(playerSelection);
+const setPlayerSelection = (string) => {
+    playerSelection = string;
 }
 const setComputerSelection = () => {
     computerSelection = getComputerChoice(getRandInt());
-    console.log(computerSelection);
 }
 
 const winSituation = (computer, player) => {
@@ -40,19 +38,22 @@ const winSituation = (computer, player) => {
     }
 }
 
-const playRound = () => {
+const setResult = () =>{
+
+    document
+        .getElementById("result")
+        .innerHTML = '<p>'+ winSituation(computerSelection, playerSelection) + '</p>';
+
+}
+
+const playRound = (string) => {
     setComputerSelection();
-    setPlayerSelection();
-    alert(winSituation(computerSelection, playerSelection));
+    setPlayerSelection(string);
+    setResult();
 }
 
-const game = () => {
-    for(let i=0;i<4;i++){
-        playRound();
-    }
-}
 
-game();
+
 
 
 
