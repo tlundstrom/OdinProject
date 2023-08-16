@@ -1,5 +1,5 @@
 let computerSelection = getComputerChoice(getRandInt());
-let playerSelection = "rock"
+let playerSelection = ""
 
 function getRandInt(){
     return Math.floor(Math.random()* 3);
@@ -18,10 +18,28 @@ function winSituation(computer, player){
     if((computer === "rock" && player === "paper") || 
     (computer === "paper" && player === "scissors") || 
     (computer === "scissors" && player === "rock")){
-        return true;
+        return "You win, " + player + " beats " + computer + ".";
+    }else if(player === computer){
+        return "Draw, try again."
     }
-    return false
+    return "You lose, " + computer + " beats " + player + ".";
 }
+
+function getPlayerSelection(){
+    let userInput = prompt("Do you choose rock, paper, or scissors?");
+    userInput = userInput.toLowerCase().trim();
+    console.log(userInput)
+    return invalidEntry(userInput)? getPlayerSelection() : userInput;
+}
+
+function setPlayerSelection(userInput){
+    playerSelection = userInput;
+}
+
+
+
+
+
 
 
 
