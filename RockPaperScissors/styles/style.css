@@ -1,0 +1,11 @@
+div{
+    display: inline-block;
+}
+
+.button-wrapper{
+    display: flex;
+    justify-content: space-around;
+}
+.result{
+    margin: 0 auto;
+}
