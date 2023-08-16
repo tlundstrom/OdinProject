@@ -14,13 +14,15 @@ function getComputerChoice(num) {
     return "scissors";
 }
 
-function winSituation(computerSelection, playerSelection){
-    if((computerSelection === "rock" && playerSelection === "paper") || 
-    (computerSelection === "paper" && playerSelection === "scissors") || 
-    (computerSelection === "scissors" && playerSelection === "rock")){
+function winSituation(computer, player){
+    if((computer === "rock" && player === "paper") || 
+    (computer === "paper" && player === "scissors") || 
+    (computer === "scissors" && player === "rock")){
         return true;
     }
+    return false
 }
+
 
 
 
