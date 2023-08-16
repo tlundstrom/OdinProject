@@ -26,7 +26,6 @@ const winSituation = (computer, player) => {
             return "You win, " + player + " beats " + computer + ".";
     }
     return "You lose, " + computer + " beats " + player + ".";
-
 }
 
 const setResult = (computerSelection, playerSelection) =>{
@@ -36,7 +35,5 @@ const setResult = (computerSelection, playerSelection) =>{
 }
 
 const playRound = (str) => {
-    console.log(str);
-    setResult(getComputerChoice(getRandInt()), str);
-}
-
+    setResult(getComputerChoice(getRandInt()), str)
+};
