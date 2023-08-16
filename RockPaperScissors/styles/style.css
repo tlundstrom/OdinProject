@@ -2,12 +2,33 @@ div{
     display: inline-block;
 }
 
-.button-wrapper{
-    margin: 50px;
-    display: flex;
-    justify-content: space-around;
+h1{
+    margin-top: 25px;
+    text-align: center;
 }
+.wrapper{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.button-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    width: 100px;
+    margin: 50px;
+}
+
 .result-wrapper{
     display: flex;
     justify-content: center;
+}
+
+.result{
+    font-weight: bold;
 }

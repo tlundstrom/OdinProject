@@ -42,7 +42,7 @@ const setResult = () =>{
 
     document
         .getElementById("result")
-        .innerHTML = '<p>'+ winSituation(computerSelection, playerSelection) + '</p>';
+        .innerHTML = winSituation(computerSelection, playerSelection);
 
 }
 
