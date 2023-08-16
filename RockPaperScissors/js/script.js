@@ -36,6 +36,7 @@ const setResult = (computerSelection, playerSelection) =>{
 }
 
 const playRound = (str) => {
-    setResult(str, getComputerChoice());
+    console.log(str);
+    setResult(getComputerChoice(getRandInt()), str);
 }
 
