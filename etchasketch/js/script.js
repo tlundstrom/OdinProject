@@ -1,15 +1,17 @@
 const DEFAULT_SIZE = 16;
 const DEFAULT_COLOR = '#333';
+const DEFAULT_MODE = 'color';
 
 let currentSize = DEFAULT_SIZE;
 let currentColor = DEFAULT_COLOR;
+let currentMode = DEFAULT_MODE;
 
 
 let mouseDown = false;
 document.body.onmousedown = () => mouseDown = true;
 document.body.onmouseup= () => mouseDown = false;
 
-const colorReset = () => {
+const gridReset = () => {
     removeGrid();
     createGrid(currentSize);
 }
@@ -26,8 +28,11 @@ const getGridSize = () => {
 
 const setGridSize = (newSize) => {
     currentSize = newSize;
-    colorReset();
+    gridReset();
+}
 
+const setColor = (color) => {
+    currentMode = color;
 }
 
 const gridWindow = document.getElementById('window');
@@ -45,9 +50,15 @@ const createGrid = (size) => {
     }
 }
 
+const genRandomRGB = () => {
+    return Math.floor(Math.random() * 256);
+}
+
 const draw = (e) => {
     if(e.type === 'mouseover' && !mouseDown) return;
-    e.target.style.background = currentColor;
+    currentMode === 'color'?
+    e.target.style.background = currentColor
+    :e.target.style.background = `rgb(${genRandomRGB()}, ${genRandomRGB()}, ${genRandomRGB()})`
 }
 
 
