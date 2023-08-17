@@ -108,7 +108,7 @@ const evaluate = (a, b, operator) => {
                 shoudReset=true;
                 return 'ERROR';
             }
-            return divide(a,b);
+            return divide(a,b).toFixed(14);
         default:
             break;
     }
@@ -126,6 +126,7 @@ const calculate = () => {
             return
         }
         firstNumber = secondNumber;
+        shoudReset = true;
     }
 }
 
