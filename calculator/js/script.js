@@ -6,6 +6,13 @@ let shoudReset = false;
 const currentDisplay = document.getElementById("display-current");
 const lastDisplay = document.getElementById('display-last');
 
+
+const errorCheck = () => {
+    if(currentDisplay.textContent === 'ERROR'){
+        return 'ERROR';
+    }
+}
+
 const getNumber = (e) => {
     let num =  e.target.textContent;
     appendNumber(num);
@@ -21,7 +28,13 @@ const displayReset = () =>{
 }
 
 const setText = (num) => {
-    currentDisplay.textContent += num;
+    if(shoudReset){
+        displayReset();
+        currentDisplay.textContent = currentDisplay.textContent += num;
+        shoudReset = false;
+        return;
+    }
+    currentDisplay.textContent = currentDisplay.textContent += num;
 }
 
 const appendNumber = (num) => {
@@ -64,9 +77,9 @@ const divide = (a, b) => {
 }
 
 const evaluate = (a, b, operator) => {
-    a = parseInt(a);
+    a = parseFloat(a);
     console.log(a);
-    b = parseInt(b);
+    b = parseFloat(b);
     switch (operator) {
         case '+':
             return add(a,b)
@@ -77,7 +90,10 @@ const evaluate = (a, b, operator) => {
         case '×':
             return multiply(a,b);
         case '÷':
-            if(b === 0) return 'ERROR';
+            if(b === 0){
+                shoudReset=true;
+                return 'ERROR';
+            }
             return divide(a,b);
         default:
             break;
@@ -85,13 +101,16 @@ const evaluate = (a, b, operator) => {
 }
 
 const calculate = () => {
-    if(operator === '÷' && currentDisplay.textContent === '0'){
-        console.log('error')
-        alert("You cant divide by 0!");
-        return
-    }else{
+    if(errorCheck() !== 'ERROR'){
         secondNumber = currentDisplay.textContent;
+        lastDisplay.textContent = `${firstNumber} ${operator} ${secondNumber}`
         currentDisplay.textContent = evaluate(firstNumber, secondNumber, operator);
+        if(secondNumber === '0'){
+            secondNumber = '';
+            lastDisplay.textContent = `${firstNumber} ${operator}`
+            return
+        }
+        firstNumber = secondNumber;
     }
 }
 
