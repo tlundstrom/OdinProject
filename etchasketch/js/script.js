@@ -61,8 +61,6 @@ const draw = (e) => {
     :e.target.style.background = `rgb(${genRandomRGB()}, ${genRandomRGB()}, ${genRandomRGB()})`
 }
 
-
-
 window.onload = () => {
     createGrid(currentSize);
 }
