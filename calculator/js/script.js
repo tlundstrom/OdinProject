@@ -2,14 +2,17 @@ let firstNumber = '';
 let secondNumber = '';
 let operator = null;
 let shoudReset = false;
+let errors = false
 
 const currentDisplay = document.getElementById("display-current");
 const lastDisplay = document.getElementById('display-last');
 
 
 const errorCheck = () => {
-    if(currentDisplay.textContent === 'ERROR'){
-        return 'ERROR';
+    console.log(currentDisplay.textContent);
+    if(currentDisplay.textContent === 'ERROR' || currentDisplay.textContent === '.'){
+        errors = true;
+        return
     }
 }
 
@@ -19,8 +22,19 @@ const getNumber = (e) => {
 }
 
 const getOperator = (e) => {
-    let newOperator = e.target.textContent;
-    setOperator(newOperator);
+    errorCheck()
+    if(errors !== true){
+        let newOperator = e.target.textContent;
+        setOperator(newOperator);
+    }
+    
+}
+
+const getDecimal = (e) => {
+    let dec = e.target.textContent;
+    if(currentDisplay.textContent.includes('.')) return
+    console.log(dec);
+    appendNumber(dec);
 }
 
 const displayReset = () =>{
@@ -32,6 +46,7 @@ const setText = (num) => {
         displayReset();
         currentDisplay.textContent = currentDisplay.textContent += num;
         shoudReset = false;
+        errors = false;
         return;
     }
     currentDisplay.textContent = currentDisplay.textContent += num;
@@ -78,7 +93,6 @@ const divide = (a, b) => {
 
 const evaluate = (a, b, operator) => {
     a = parseFloat(a);
-    console.log(a);
     b = parseFloat(b);
     switch (operator) {
         case '+':
@@ -101,7 +115,8 @@ const evaluate = (a, b, operator) => {
 }
 
 const calculate = () => {
-    if(errorCheck() !== 'ERROR'){
+    errorCheck();
+    if(errors !== true){
         secondNumber = currentDisplay.textContent;
         lastDisplay.textContent = `${firstNumber} ${operator} ${secondNumber}`
         currentDisplay.textContent = evaluate(firstNumber, secondNumber, operator);
