@@ -11,32 +11,28 @@
     <div class="wrapper">
         <div class="calculator">
             <div class="display">
-                <div class="display-last">
-                    11-8
-                </div>
-                <div class="display-current">
-                    50
-                </div>
+                <div id="display-last" class="display-last"></div>
+                <div id="display-current" class="display-current"></div>
             </div>
             <div class="keypad">
-                <button class="btn btn-warning span-2">CLEAR</button>
-                <button class="btn btn-danger span-2">DELETE</button>
-                <button class="btn btn-dark">7</button>
-                <button class="btn btn-dark">8</button>
-                <button class="btn btn-dark">9</button>
-                <button class="btn btn-dark">&#247;</button>
-                <button class="btn btn-dark">4</button>
-                <button class="btn btn-dark">5</button>
-                <button class="btn btn-dark">6</button>
-                <button class="btn btn-dark">x</button>
-                <button class="btn btn-dark">1</button>
-                <button class="btn btn-dark">2</button>
-                <button class="btn btn-dark">3</button>
-                <button class="btn btn-dark">-</button>
-                <button class="btn btn-dark">.</button>
-                <button class="btn btn-dark">0</button>
-                <button class="btn btn-dark">=</button>
-                <button class="btn btn-dark">+</button>
+                <button onclick="clearDisplay()" class="btn btn-danger span-2">CLEAR</button>
+                <button onclick="deleteCurrent()" class="btn btn-warning span-2">DELETE</button>
+                <button onclick="getNumber(event)" class="btn btn-dark">7</button>
+                <button onclick="getNumber(event)" class="btn btn-dark">8</button>
+                <button onclick="getNumber(event)" class="btn btn-dark">9</button>
+                <button onclick="getOperator(event)" class="btn btn-dark">÷</button>
+                <button onclick="getNumber(event)" class="btn btn-dark">4</button>
+                <button onclick="getNumber(event)" class="btn btn-dark">5</button>
+                <button onclick="getNumber(event)" class="btn btn-dark">6</button>
+                <button onclick="getOperator(event)" class="btn btn-dark">×</button>
+                <button onclick="getNumber(event)" class="btn btn-dark">1</button>
+                <button onclick="getNumber(event)" class="btn btn-dark">2</button>
+                <button onclick="getNumber(event)" class="btn btn-dark">3</button>
+                <button onclick="getOperator(event)" class="btn btn-dark">-</button>
+                <button onclick="getPoint(event)" class="btn btn-dark">.</button>
+                <button onclick="getNumber(event)" class="btn btn-dark">0</button>
+                <button onclick="calculate()" class="btn btn-dark">=</button>
+                <button onclick="getOperator(event)" class="btn btn-dark">+</button>
             </div>
         </div>
     </div>

@@ -46,6 +46,10 @@ body{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
+
+    >.btn{
+        font-size: 20px;
+    }
     
     >.span-2{
         grid-column: span 2;
