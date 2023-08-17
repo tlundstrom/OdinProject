@@ -1,7 +1,42 @@
+div{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: darkgray;
+}
+
 #window{
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
     width: 480px;
     height: 480px;
+    background-color: white;
+}
+
+header{
+    text-align: center;
+    margin: 25px;
+}
+
+.cell{
+    border: .1px solid gray;
+}
+
+.main-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.etchasketch, .controls{
+    display: flex;
+}
+
+.controls{
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btn{
+    margin: 10px 100px;
 }
