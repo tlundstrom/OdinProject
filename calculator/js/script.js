@@ -108,7 +108,7 @@ const evaluate = (a, b, operator) => {
                 shoudReset=true;
                 return 'ERROR';
             }
-            return divide(a,b).toFixed(14);
+            return divide(a,b);
         default:
             break;
     }
