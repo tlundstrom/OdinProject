@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 side-bar">
+                    <div class="row row-main logo-wrapper">
+                        <div class="logo">
+                            <img height="90px" src="resources/odin-lined.png" alt="">
+                            <h1>ODIN</h1>
+                        </div>
+                    </div>
+                    <div class="row row-main spacer"></div>
+                    <div class="row row-main photo-credit">
+                        <p>Photo by <a class="link-light" href="https://unsplash.com/@mischievous_penguins">Casey Horner</a> on <a class="link-light" href="https://unsplash.com/">Unsplash</a></p>
+                    </div>
+                </div>
+                <div class="col-sm main-container">
+                    <div class="row row-main hero-message">
+                        <div class="hero-wrapper">
+                            <p>This is not a real online service! You know you need something like this in your life to help you realize your deepest dreams.<br/>Sign up <em>now</em> to get started.</p>
+                            <p>You <em>know</em> you want to.</p>
+                        </div>
+                    </div>
+                    <div class="row row-main sign-up-form">
+                        <div class="form">
+                            <h2>Lets do this!</h2>
+                            <form>
+                                <div class="row form-row g-5 ">
+                                    <div class="col-6">
+                                        <label for="inputFirstName" class="col-form-label">FIRST NAME</label>
+                                        <input type="text" id="inputFirstName" class="form-control">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputLastName" class="col-form-label">LAST NAME</label>
+                                        <input type="text" id="inputLastName" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-row g-5">
+                                    <div class="col-6">
+                                        <label for="inputEmail" class="col-form-label">EMAIL</label>
+                                        <input type="text" id="inputEmail" class="form-control">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputPhone" class="col-form-label">PHONE NUMBER</label>
+                                        <input type="text" id="inputPhone" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-row g-5">
+                                    <div class="col-6">
+                                        <label for="inputPassword" class="col-form-label">PASSWORD</label>
+                                        <input type="password" id="inputPassword" class="form-control">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputConfirmPassword" class="col-form-label">CONFIRM PASSWORD</label>
+                                        <input onkeyup="verifyPassword()" type="password" id="inputConfirmPassword" class="form-control">
+                                        <p id="errorMsg" style="color: red; display:none;">Passwords do not match!</p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row row-main submit-area">
+                        <div class="submit">
+                            <button  class="btn btn-success sign-up-btn">Create Account</button>
+                            <p>Already have an account? <a class="link-dark" href="/">Log in</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
