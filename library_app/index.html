@@ -12,11 +12,42 @@
         <h1>Library</h1>
     </header>
     <div class="container">
-        <div class="app-wrapper">
-            <button class="btn btn-primary">+ Add book</button>
-            <div class="App"></div>
+        <div class="modal fade" id="addBookModal" tabindex="-1" aria-labelledby="addBookModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="addBookModalLabel">Enter a Book</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="modalForm">
+                            <div class="form-row">
+                                <div class="col col-11">
+                                    <input type="text" class="form-control" id="title" placeholder="Book Title">
+                                    <input type="text" class="form-control" id="author" placeholder="Book Author">
+                                    <input type="text" class="form-control" id="pages" placeholder="Number of Pages">
+                                    <input type="checkbox" class="form-check-input" id="read">
+                                    <label for="read" class="form-check-label">Have you read this book?</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="addBook(event)">Save changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="app-wrapper">
+            <div class="button-wrapper">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookModal">Add Book</button>
+            </div>
+            <div id="App"></div>
+        </div>
+        
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 </body>

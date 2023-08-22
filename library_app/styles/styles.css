@@ -7,3 +7,30 @@ header{
     justify-content: center;
     padding: 40px;
 }
+
+.form-control, .form-check-input{
+    margin: 10px;
+}
+
+.button-wrapper{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+#App{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.bookCard{
+    margin:10px;
+    display: flex;
+    flex-direction: column;
+    padding:15px;
+    border-radius: 15px;
+}
+
+.cardButton{
+    margin-bottom: 10px;
+}
