@@ -41,7 +41,7 @@ const gameBoard = (() => {
 
     const printBoard = () => {
         const boardWithCellValues = board.map((x) => x.map((cell) => cell.getValue()))
-        console.log(boardWithCellValues);
+        // console.log(boardWithCellValues);
     };
 
     return {getBoard, placeMarker, printBoard}
@@ -83,9 +83,58 @@ const  GameController = (()=> {
     const printNewRound = (e) => {
         board.printBoard();
         const title = e.target;
-        console.log(getActivePlayer())
         title.innerHTML = getActivePlayer().playerMarker;
     };
+
+    const checkRows = () =>{
+        for(let i=0; i<3; i++){
+            
+            let row = [];
+            for(let j=0; j<3; j++){
+                row.push(board.getBoard()[i][j].getValue());
+            }
+            if(row.every(cell => cell === 'X') || row.every(cell => cell === 'O')){
+                return true;
+            }
+        }
+        return;
+    }
+    const checkCols = () => {
+        for(let i=0; i<3; i++){
+            let col = [];
+            for(let j=0; j<3; j++){
+                col.push(board.getBoard()[j][i].getValue());
+            }
+            if(col.every(cell => cell === 'X') || col.every(cell => cell === 'O')){
+                return true;
+            }
+        }
+        return;
+    }
+
+    const checkDiag = () => {
+        let diag1 = [];
+        let diag2 = [];
+        for(let i=0; i<3;i++){
+            for(let j=0;j<3;j++){
+                if(i===j){
+                    diag1.push(board.getBoard()[i][j].getValue());
+                }
+                if((i===0 && j===2)||(i===2 && j===0)||(i===1 && j===1)){
+                    diag2.push(board.getBoard()[i][j].getValue());
+                }
+            }
+        }
+        if(diag1.every(cell => cell === 'X') || diag1.every(cell => cell === 'O')){
+            return true;
+        }
+        if(diag2.every(cell => cell === 'X') || diag2.every(cell => cell ==='O')){
+            return true;
+        }
+    }
+
+    const winConditions = () => {
+    }
 
     const playRound = (e) => {
         const row = e.target.dataset.row;
@@ -93,8 +142,10 @@ const  GameController = (()=> {
         board.placeMarker(row,col, getActivePlayer().playerMarker)=== null?
             null
             :printNewRound(e) + switchPlayerTurn();
-    }
-
+        checkRows();
+        checkCols();
+        checkDiag();
+        }
     return {playRound}
 })();
 
