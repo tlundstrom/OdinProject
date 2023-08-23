@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import Tile from "./Tile";
-import WinModal from "./Modal";
+import WinModalComp from "./WinModal";
+import DrawModalComp from "./DrawModal";
 
-const GameBoard = (props) => {
+const GameBoard = () => {
     const [isNext, setIsNext] = useState(true);
     const [tiles, setTiles] = useState(Array(9).fill(null));
-    const [winner, setWinner] = useState('');
-    const [modal, setModal] = useState(false);
+    const [gameOverMessage, setGameOverMessage] = useState('');
+    const [winModal, setWinModal] = useState(false);
+    const [drawModal, setDrawModal] = useState(false);
 
     const handleNewGame = () => {
         setIsNext(true);
@@ -14,7 +16,7 @@ const GameBoard = (props) => {
         setWinner('');
     }
 
-    const handleClick = (i) => {
+    const handleMove = (i) => {
         if (tiles[i]|| calculateWinner(tiles)) {return}
         const nextTiles = tiles.slice();
         if(isNext){
@@ -22,54 +24,87 @@ const GameBoard = (props) => {
         }else{
             nextTiles[i] = "O";
         }
-        setIsNext(!isNext)
         setTiles(nextTiles);
+        setIsNext(!isNext)
     }
+
     useEffect(()=>{
         if(calculateWinner(tiles)){
-            setWinner(calculateWinner(tiles));
-            setModal(!modal);
+            setGameOverMessage((calculateWinner(tiles)=== 'X'?'You have won!':'You have lost...'));
+            setWinModal(!winModal);
+            return;
         }
+        if(isBoardFilled(tiles)){
+            setDrawModal(!drawModal);
+        }
+        
     },[tiles]);
 
+    
+    
     useEffect(() =>{
-        if(!isNext){
-            //dumb placement
-            let availMoves = [];
-            for(let i=0;i<tiles.length-1; i++){
-                if(tiles[i] === null){
-                    availMoves.push(i);
+        async function delayChoice(){
+            await sleep(200);
+            if(!isNext){
+                const tile = tiles.slice();
+                
+                const bestTile = findBestMove(tile, 'O');
+                if(bestTile !== -1){
+                    console.log(bestTile);
+                    handleMove(bestTile);
                 }
+                // dumb placement
+                // let availMoves = [];
+                // for(let i=0;i<tiles.length-1; i++){
+                //     if(tiles[i] === null){
+                //         availMoves.push(i);
+                //     }
+                // }
+                // let aiMove = availMoves[Math.floor(Math.random() * (availMoves.length))];
+                // console
+                // handleMove(aiMove);
             }
-            let aiMove = availMoves[Math.floor(Math.random() * (availMoves.length + 1))];
-            
-            handleClick(aiMove);
         }
+        delayChoice();
     },[isNext]);
 
     return (
         <>
             <div className="board-wrapper">
                 <div className="board-row">
-                    <Tile value={tiles[0]} onTileClick={()=> handleClick(0)} />
-                    <Tile value={tiles[1]} onTileClick={()=> handleClick(1)} />
-                    <Tile value={tiles[2]} onTileClick={()=> handleClick(2)} />
+                    <Tile value={tiles[0]} onTileClick={()=> handleMove(0)} />
+                    <Tile value={tiles[1]} onTileClick={()=> handleMove(1)} />
+                    <Tile value={tiles[2]} onTileClick={()=> handleMove(2)} />
                 </div>
                 <div className="board-row">
-                    <Tile value={tiles[3]} onTileClick={()=> handleClick(3)} />
-                    <Tile value={tiles[4]} onTileClick={()=> handleClick(4)} />
-                    <Tile value={tiles[5]} onTileClick={()=> handleClick(5)} />
+                    <Tile value={tiles[3]} onTileClick={()=> handleMove(3)} />
+                    <Tile value={tiles[4]} onTileClick={()=> handleMove(4)} />
+                    <Tile value={tiles[5]} onTileClick={()=> handleMove(5)} />
                 </div>
                 <div className="board-row">
-                    <Tile value={tiles[6]} onTileClick={()=> handleClick(6)} />
-                    <Tile value={tiles[7]} onTileClick={()=> handleClick(7)} />
-                    <Tile value={tiles[8]} onTileClick={()=> handleClick(8)} />
+                    <Tile value={tiles[6]} onTileClick={()=> handleMove(6)} />
+                    <Tile value={tiles[7]} onTileClick={()=> handleMove(7)} />
+                    <Tile value={tiles[8]} onTileClick={()=> handleMove(8)} />
                 </div>
             </div>
-            <WinModal handleNewGame={handleNewGame} winner={winner} modal={modal} setModal={setModal}/>
+            <WinModalComp handleNewGame={handleNewGame} gameOverMessage={gameOverMessage} winModal={winModal} setWinModal={setWinModal}/>
+            <DrawModalComp handleNewGame={handleNewGame} drawModal={drawModal} setDrawModal={setDrawModal}/>
         </>
     );
 };
+
+function isBoardFilled(tiles) {
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i] === null) {
+        return false;
+        }
+    }
+    return true;
+}
+
+const sleep = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+);
 
 const calculateWinner = (tiles) => {
     const lines = [
@@ -91,5 +126,46 @@ const calculateWinner = (tiles) => {
 return null;
 }
 
+function findBestMove(tiles, player){
+    const opponenet = player === 'x'? 'O': 'X';
+
+    const minimax = (tiles, isMax) =>{
+        const winner = calculateWinner(tiles);
+        if(winner === player) return {tile: -1, score:1};
+
+        if(winner === opponenet) return {tile:-1, score:-1};
+
+        if(isBoardFilled(tiles)) return {tile: -1, score: 0};
+
+        const best = {tile: -1, score: isMax? -1000 : 1000};
+
+        for(let i=0;i<tiles.length; i++){
+            if(tiles[i]){
+                continue;
+            }
+        
+            tiles[i] = isMax ? player:opponenet;
+
+            const score = minimax(tiles, !isMax).score;
+
+            tiles[i] = null;
+
+            if(isMax){
+                if(score > best.score){
+                    best.score = score;
+                    best.tile = i;
+                    console.log(best.tile);
+                }
+            } else {
+                if(score < best.score) {
+                    best.score = score;
+                    best.tile = i;
+                }
+            }
+        }
+        return best;
+    };
+    return minimax(tiles,true).tile;
+}
 
 export default GameBoard
