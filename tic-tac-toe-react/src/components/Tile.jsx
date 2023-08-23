@@ -1,16 +1,10 @@
-import { useState } from "react";
 import { Button } from "reactstrap"
 
-const Tile = () => {
-    const [value, setValue] = useState(null);
-
-    const handleClick = ()=> {
-        setValue('X');
-    }
+const Tile = ({value, onTileClick}) => {
     return <Button 
                 color="light" 
                 className="tile"
-                onClick={handleClick}
+                onClick={onTileClick}
             >
                 {value}
             </Button>

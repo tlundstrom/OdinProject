@@ -15,17 +15,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px;;
+    padding: 50px;
+    >div>button{
+        background-color:white !important;
+        border:5px solid black !important;
+        border-radius: 0% !important;
+    }
 }
 .app-container{
     margin: 50px;
 }
 
-button{
-    background-color:white !important;
-    border:5px solid black !important;
-    border-radius: 0% !important;
-}
+
 
 #root > div > div:nth-child(1) > button:nth-child(1){
     border-top: none !important;
