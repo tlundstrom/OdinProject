@@ -133,7 +133,11 @@ const  GameController = (()=> {
         }
     }
 
-    const winConditions = () => {
+    const winCheck = () => {
+        if(checkDiag() || checkCols() || checkRows()){
+            console.log("win")
+            return true;
+        }
     }
 
     const playRound = (e) => {
@@ -142,11 +146,15 @@ const  GameController = (()=> {
         board.placeMarker(row,col, getActivePlayer().playerMarker)=== null?
             null
             :printNewRound(e) + switchPlayerTurn();
-        checkRows();
-        checkCols();
-        checkDiag();
         }
+        winCheck();
     return {playRound}
+
+    const endGame = () =>{
+        if(winCheck()){
+            
+        }
+    }
 })();
 
 
