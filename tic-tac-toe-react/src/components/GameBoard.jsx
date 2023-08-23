@@ -3,7 +3,7 @@ import Tile from "./Tile";
 import WinModal from "./Modal";
 
 const GameBoard = (props) => {
-    const [IsNext, setIsNext] = useState(true);
+    const [isNext, setIsNext] = useState(true);
     const [tiles, setTiles] = useState(Array(9).fill(null));
     const [winner, setWinner] = useState('');
     const [modal, setModal] = useState(false);
@@ -17,12 +17,12 @@ const GameBoard = (props) => {
     const handleClick = (i) => {
         if (tiles[i]|| calculateWinner(tiles)) {return}
         const nextTiles = tiles.slice();
-        if(IsNext){
+        if(isNext){
             nextTiles[i] = "X";
         }else{
             nextTiles[i] = "O";
         }
-        setIsNext(!IsNext)
+        setIsNext(!isNext)
         setTiles(nextTiles);
     }
     useEffect(()=>{
@@ -31,6 +31,21 @@ const GameBoard = (props) => {
             setModal(!modal);
         }
     },[tiles]);
+
+    useEffect(() =>{
+        if(!isNext){
+            //dumb placement
+            let availMoves = [];
+            for(let i=0;i<tiles.length-1; i++){
+                if(tiles[i] === null){
+                    availMoves.push(i);
+                }
+            }
+            let aiMove = availMoves[Math.floor(Math.random() * (availMoves.length + 1))];
+            
+            handleClick(aiMove);
+        }
+    },[isNext]);
 
     return (
         <>
