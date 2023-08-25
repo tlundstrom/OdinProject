@@ -1,0 +1,83 @@
+{
+    "logged-in": [
+        {
+            "id": 1,
+            "name": "Morgan Oakley",
+            "url": "@morgan"
+        }
+    ],
+
+    "announcements" : [
+        {
+            "id": 1,
+            "title": "Site Maintenance",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non sodales neque sodales ut etiam sit amet nisl purus. Praesent elementum facilisis leo vel fringilla est ullamcorper. Sed elementum tempus egestas sed sed risus"
+        },
+        {
+            "id": 2,
+            "title": "Community Share Day",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non sodales neque sodales ut etiam sit amet nisl purus. Praesent elementum facilisis leo vel fringilla est ullamcorper. Sed elementum tempus egestas sed sed risus"
+        },
+        {
+            "id": 3,
+            "title": "Updated Privacy Policy",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non sodales neque sodales ut etiam sit amet nisl purus. Praesent elementum facilisis leo vel fringilla est ullamcorper. Sed elementum tempus egestas sed sed risus"
+        }
+    ],
+
+    "Projects": [
+        {
+            "id": 1,
+            "title": "Super Cool Project",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non sodales neque sodales ut etiam sit amet nisl purus. Praesent elementum facilisis leo vel fringilla est ullamcorper. Sed elementum tempus egestas sed sed risus"
+        },
+        {
+            "id": 2,
+            "title": "Less Cool Project",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non sodales neque sodales ut etiam sit amet nisl purus. Praesent elementum facilisis leo vel fringilla est ullamcorper. Sed elementum tempus egestas sed sed risus"
+        },
+        {
+            "id": 3,
+            "title": "Impossible App",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non sodales neque sodales ut etiam sit amet nisl purus. Praesent elementum facilisis leo vel fringilla est ullamcorper. Sed elementum tempus egestas sed sed risus"
+        },
+        {
+            "id": 4,
+            "title": "Easy Peasy App",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non sodales neque sodales ut etiam sit amet nisl purus. Praesent elementum facilisis leo vel fringilla est ullamcorper. Sed elementum tempus egestas sed sed risus"
+        },
+        {
+            "id": 5,
+            "title": "Ad Blocker",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non sodales neque sodales ut etiam sit amet nisl purus. Praesent elementum facilisis leo vel fringilla est ullamcorper. Sed elementum tempus egestas sed sed risus"
+        },
+        {
+            "id": 6,
+            "title": "Money Maker",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non sodales neque sodales ut etiam sit amet nisl purus. Praesent elementum facilisis leo vel fringilla est ullamcorper. Sed elementum tempus egestas sed sed risus"
+        }
+    ],
+
+    "Trending": [
+        {
+            "id": 1,
+            "title": "World Peace Builder",
+            "user-url": "@tegan"
+        },
+        {
+            "id": 2,
+            "title": "Super Cool Project",
+            "user-url": "@morgan"
+        },
+        {
+            "id": 3,
+            "title": "Life Changing App",
+            "user-url": "@kendall"
+        },
+        {
+            "id": 4,
+            "title": "No Traffic Maker",
+            "user-url": "@alex"
+        }
+    ]
+}
