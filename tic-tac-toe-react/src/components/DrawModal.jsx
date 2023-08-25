@@ -1,9 +1,9 @@
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
-const DrawModalComp = ({handleNewGame, drawModal, setDrawModal}) => {
-    const toggle = () => setDrawModal(!drawModal);
+const DrawModalComp = ({handleNewGame, showDrawModal, setShowDrawModal}) => {
+    const toggle = () => setShowDrawModal(!showDrawModal);
     return(
-        <Modal backdrop="static" isOpen={drawModal} toggle={toggle}>
+        <Modal backdrop="static" isOpen={showDrawModal} toggle={toggle}>
             <ModalHeader toggle={toggle}>Tie Game</ModalHeader>
             <ModalBody>
                 It's a draw...
