@@ -2,23 +2,51 @@ import { useEffect, useState } from "react";
 import Tile from "./Tile";
 import WinModalComp from "./WinModal";
 import DrawModalComp from "./DrawModal";
+import { Form, FormGroup, Input, Tooltip } from "reactstrap";
+
+const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
+
+
 
 const GameBoard = () => {
+    
+    const [gameState, setGameState] = useState({
+        isNext: true,
+        tiles: Array(9).fill(null),
+        gameOverMessage: '',
+        showWinModal: false,
+        showDrawModal: false
+    })
+
+
     const [isNext, setIsNext] = useState(true);
     const [tiles, setTiles] = useState(Array(9).fill(null));
     const [gameOverMessage, setGameOverMessage] = useState('');
-    const [winModal, setWinModal] = useState(false);
-    const [drawModal, setDrawModal] = useState(false);
+    const [showWinModal, setShowWinModal] = useState(false);
+    const [showDrawModal, setShowDrawModal] = useState(false);
+    const [difficulty, setDifficulty] = useState(50);
+    const [tooltipOpen, setTooltipOpen] = useState(false);
+
+    const toggleTip = () => setTooltipOpen(!tooltipOpen);
 
     const handleNewGame = () => {
         setIsNext(true);
         setTiles(Array(9).fill(null));
-        setWinner('');
+        setGameOverMessage('');
     }
 
     const handleMove = (i) => {
-        if (tiles[i]|| calculateWinner(tiles)) {return}
-        const nextTiles = tiles.slice();
+        if (tiles[i]|| calculateWinner(tiles)) return
+        const nextTiles = [...tiles];
         if(isNext){
             nextTiles[i] = "X";
         }else{
@@ -26,43 +54,45 @@ const GameBoard = () => {
         }
         setTiles(nextTiles);
         setIsNext(!isNext)
+    
     }
 
     useEffect(()=>{
-        if(calculateWinner(tiles)){
-            setGameOverMessage((calculateWinner(tiles)=== 'X'?'You have won!':'You have lost...'));
-            setWinModal(!winModal);
+        const winner = calculateWinner(tiles);
+        if(winner){
+            setGameOverMessage((winner=== 'X'?'You have won!':'You have lost...'));
+            setShowWinModal(!showWinModal);
             return;
         }
         if(isBoardFilled(tiles)){
-            setDrawModal(!drawModal);
+            setShowDrawModal(!showDrawModal);
         }
         
     },[tiles]);
 
-    
-    
     useEffect(() =>{
         async function delayChoice(){
             await sleep(200);
             if(!isNext){
-                const tile = tiles.slice();
-                
-                const bestTile = findBestMove(tile, 'O');
+                const tilesCopy = [...tiles];
+                const aiPercentage = Math.floor(Math.random()*100);
+                console.log(`${difficulty} and ${aiPercentage}`)
+
+                if(difficulty>aiPercentage){
+                    const bestTile = findBestMove(tilesCopy, 'O');
                 if(bestTile !== -1){
-                    console.log(bestTile);
                     handleMove(bestTile);
                 }
-                // dumb placement
-                // let availMoves = [];
-                // for(let i=0;i<tiles.length-1; i++){
-                //     if(tiles[i] === null){
-                //         availMoves.push(i);
-                //     }
-                // }
-                // let aiMove = availMoves[Math.floor(Math.random() * (availMoves.length))];
-                // console
-                // handleMove(aiMove);
+                }else{
+                    let availMoves = [];
+                    for(let i=0;i<tiles.length-1; i++){
+                        if(tiles[i] === null){
+                            availMoves.push(i);
+                        }
+                    }
+                    let aiMove = availMoves[Math.floor(Math.random() * (availMoves.length))];
+                    handleMove(aiMove);
+                }
             }
         }
         delayChoice();
@@ -87,8 +117,26 @@ const GameBoard = () => {
                     <Tile value={tiles[8]} onTileClick={()=> handleMove(8)} />
                 </div>
             </div>
-            <WinModalComp handleNewGame={handleNewGame} gameOverMessage={gameOverMessage} winModal={winModal} setWinModal={setWinModal}/>
-            <DrawModalComp handleNewGame={handleNewGame} drawModal={drawModal} setDrawModal={setDrawModal}/>
+            <h5 style={{textAlign: 'center'}}>Set Difficulty</h5>
+            <Form style={{margin: '0 auto', width: '400px'}}>
+                <FormGroup>
+                    <Input
+                        id="difficulty"
+                        name="range"
+                        type="range"
+                        onChange={(e) => setDifficulty(e.target.value)}
+                    />
+                    <Tooltip
+                        isOpen={tooltipOpen}
+                        target='difficulty'
+                        toggle={toggleTip}
+                        >
+                            {difficulty}
+                        </Tooltip>
+                </FormGroup>
+            </Form>
+            <WinModalComp handleNewGame={handleNewGame} gameOverMessage={gameOverMessage} showWinModal={showWinModal} setShowWinModal={setShowWinModal}/>
+            <DrawModalComp handleNewGame={handleNewGame} showDrawModal={showDrawModal} setShowDrawModal={setShowDrawModal}/>
         </>
     );
 };
@@ -107,16 +155,6 @@ const sleep = ms => new Promise(
 );
 
 const calculateWinner = (tiles) => {
-    const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ];
     for (let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i];
         if (tiles[a] && tiles[a] === tiles[b] && tiles[a] === tiles[c]) {
@@ -154,7 +192,6 @@ function findBestMove(tiles, player){
                 if(score > best.score){
                     best.score = score;
                     best.tile = i;
-                    console.log(best.tile);
                 }
             } else {
                 if(score < best.score) {
