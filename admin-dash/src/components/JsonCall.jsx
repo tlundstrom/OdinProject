@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const JsonCall= (source, getData) => {
+const JsonCall= ({source, getData}) => {
 
     const getData = () =>{
         let requestOptions ={
