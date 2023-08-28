@@ -15,106 +15,99 @@ const lines = [
     [2, 4, 6]
 ]
 
+const initialGameState = {
+    isNext: true,
+    tiles: Array(9).fill(null),
+    difficulty: 50
+}
 
 
 const GameBoard = () => {
     
-    const [gameState, setGameState] = useState({
-        isNext: true,
-        tiles: Array(9).fill(null),
-        gameOverMessage: '',
-        showWinModal: false,
-        showDrawModal: false
-    })
-
-
-    const [isNext, setIsNext] = useState(true);
-    const [tiles, setTiles] = useState(Array(9).fill(null));
+    const [gameState, setGameState] = useState(initialGameState)
     const [gameOverMessage, setGameOverMessage] = useState('');
     const [showWinModal, setShowWinModal] = useState(false);
     const [showDrawModal, setShowDrawModal] = useState(false);
-    const [difficulty, setDifficulty] = useState(50);
     const [tooltipOpen, setTooltipOpen] = useState(false);
 
     const toggleTip = () => setTooltipOpen(!tooltipOpen);
 
     const handleNewGame = () => {
-        setIsNext(true);
-        setTiles(Array(9).fill(null));
-        setGameOverMessage('');
+        setGameState(initialGameState)
     }
 
     const handleMove = (i) => {
-        if (tiles[i]|| calculateWinner(tiles)) return
-        const nextTiles = [...tiles];
-        if(isNext){
+        if (gameState.tiles[i]|| calculateWinner(gameState.tiles)) return
+        const newState = {...gameState}
+        const nextTiles = [...gameState.tiles];
+        if(gameState.isNext){
             nextTiles[i] = "X";
         }else{
             nextTiles[i] = "O";
         }
-        setTiles(nextTiles);
-        setIsNext(!isNext)
-    
+        newState.tiles = nextTiles;
+        newState.isNext =!newState.isNext;
+        setGameState(newState);
     }
 
     useEffect(()=>{
-        const winner = calculateWinner(tiles);
+        const winner = calculateWinner(gameState.tiles);
         if(winner){
             setGameOverMessage((winner=== 'X'?'You have won!':'You have lost...'));
             setShowWinModal(!showWinModal);
             return;
         }
-        if(isBoardFilled(tiles)){
+        if(isBoardFilled(gameState.tiles)){
             setShowDrawModal(!showDrawModal);
         }
         
-    },[tiles]);
+    },[gameState.tiles]);
 
     useEffect(() =>{
         async function delayChoice(){
             await sleep(200);
-            if(!isNext){
-                const tilesCopy = [...tiles];
+            if(!gameState.isNext){
+                const tilesCopy = [...gameState.tiles];
                 const aiPercentage = Math.floor(Math.random()*100);
-                console.log(`${difficulty} and ${aiPercentage}`)
 
-                if(difficulty>aiPercentage){
+                if(gameState.difficulty>aiPercentage){
                     const bestTile = findBestMove(tilesCopy, 'O');
                 if(bestTile !== -1){
                     handleMove(bestTile);
                 }
                 }else{
-                    let availMoves = [];
-                    for(let i=0;i<tiles.length-1; i++){
-                        if(tiles[i] === null){
-                            availMoves.push(i);
-                        }
-                    }
+                    let availMoves = gameState.tiles.map((element, index) => element === null? index:null).filter(p=> p!=null);
                     let aiMove = availMoves[Math.floor(Math.random() * (availMoves.length))];
                     handleMove(aiMove);
                 }
             }
         }
         delayChoice();
-    },[isNext]);
+    },[gameState.isNext]);
+
+    const handleDifficultyChange = (e) => {
+        const newState = {...gameState};
+        newState.difficulty = e.target.value;
+        setGameState(newState);
+    }
 
     return (
         <>
             <div className="board-wrapper">
                 <div className="board-row">
-                    <Tile value={tiles[0]} onTileClick={()=> handleMove(0)} />
-                    <Tile value={tiles[1]} onTileClick={()=> handleMove(1)} />
-                    <Tile value={tiles[2]} onTileClick={()=> handleMove(2)} />
+                    <Tile value={gameState.tiles[0]} onTileClick={()=> handleMove(0)} />
+                    <Tile value={gameState.tiles[1]} onTileClick={()=> handleMove(1)} />
+                    <Tile value={gameState.tiles[2]} onTileClick={()=> handleMove(2)} />
                 </div>
                 <div className="board-row">
-                    <Tile value={tiles[3]} onTileClick={()=> handleMove(3)} />
-                    <Tile value={tiles[4]} onTileClick={()=> handleMove(4)} />
-                    <Tile value={tiles[5]} onTileClick={()=> handleMove(5)} />
+                    <Tile value={gameState.tiles[3]} onTileClick={()=> handleMove(3)} />
+                    <Tile value={gameState.tiles[4]} onTileClick={()=> handleMove(4)} />
+                    <Tile value={gameState.tiles[5]} onTileClick={()=> handleMove(5)} />
                 </div>
                 <div className="board-row">
-                    <Tile value={tiles[6]} onTileClick={()=> handleMove(6)} />
-                    <Tile value={tiles[7]} onTileClick={()=> handleMove(7)} />
-                    <Tile value={tiles[8]} onTileClick={()=> handleMove(8)} />
+                    <Tile value={gameState.tiles[6]} onTileClick={()=> handleMove(6)} />
+                    <Tile value={gameState.tiles[7]} onTileClick={()=> handleMove(7)} />
+                    <Tile value={gameState.tiles[8]} onTileClick={()=> handleMove(8)} />
                 </div>
             </div>
             <h5 style={{textAlign: 'center'}}>Set Difficulty</h5>
@@ -124,14 +117,14 @@ const GameBoard = () => {
                         id="difficulty"
                         name="range"
                         type="range"
-                        onChange={(e) => setDifficulty(e.target.value)}
+                        onChange={(e)=> handleDifficultyChange(e)}
                     />
                     <Tooltip
                         isOpen={tooltipOpen}
                         target='difficulty'
                         toggle={toggleTip}
                         >
-                            {difficulty}
+                            {gameState.difficulty}
                         </Tooltip>
                 </FormGroup>
             </Form>
