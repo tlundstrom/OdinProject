@@ -2,6 +2,11 @@ import ComponentTitle from "./ComponentTitle"
 import { useEffect, useState } from "react";
 import JsonCall from "./JsonCall"
 
+type dataParameters = {
+    title:string,
+    content:string
+}
+
 
 const Announcements: React.FC = () => {
     const [data, setData] = useState([]);
@@ -14,7 +19,7 @@ const Announcements: React.FC = () => {
             <ComponentTitle componentTitle="Announcments"/>
             <div className="announcement-list">
                 <div>
-                    {data.map((item,index) => {
+                    {data.map((item: dataParameters,index: number) => {
                         return (
                             <div key={index}>
                                 <h4>{item.title}</h4>
