@@ -1,14 +1,17 @@
-import Announcements from './components/Announcements';
-import Trending from './components/Trending';
-import Projects from './components/Projects';
+
 import './App.css'
+import SideBar from './components/Sidebar';
+import Header from './components/Header';
+import DashBoard from './components/Dashboard';
 
 function App() {
 
   return (
-    // <Announcements/>
-    // <Trending/>
-    <Projects/> 
+    <div className='wrapper'>
+      <SideBar/>
+      <Header />
+      <DashBoard />
+    </div>
   )
 }
 

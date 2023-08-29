@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import JsonCall from "./JsonCall";
-import ComponentTitle from "./ComponentTitle";
+import AltRouteOutlinedIcon from '@mui/icons-material/AltRouteOutlined';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import StarBorderPurple500OutlinedIcon from '@mui/icons-material/StarBorderPurple500Outlined';
 
 type dataParameters = {
     id: number,
@@ -17,14 +19,20 @@ const Projects = () => {
     },[])
     return(
         <div className="projects-wrapper">
-            <ComponentTitle componentTitle="Your Projects"/>
             <div className="projects-list">
                 <div>
                     {data.map((item:dataParameters,index: number) => {
                         return (
-                            <div key={index}>
-                                <h5><strong>{item.title}</strong></h5>
-                                <p>{item.content.substring(0,150)}</p>
+                            <div className="project" key={index}>
+                                <div>
+                                    <h3>{item.title}</h3>
+                                    <p>{item.content.substring(0,150)}</p>
+                                </div>
+                                <div>
+                                    <StarBorderPurple500OutlinedIcon />
+                                    <VisibilityOutlinedIcon />
+                                    <AltRouteOutlinedIcon />
+                                </div>
                             </div>
                         )
                     })}

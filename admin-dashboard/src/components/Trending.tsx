@@ -1,4 +1,3 @@
-import ComponentTitle from "./ComponentTitle"
 import { useEffect, useState } from "react";
 import JsonCall from "./JsonCall"
 
@@ -17,14 +16,16 @@ const Trending = () =>{
     },[])
     return (
         <div className="trending-wrapper">
-            <ComponentTitle componentTitle="Trending"/>
             <div className="trending-list">
                 <div>
                     {data.map((item: dataParameters,index: number) => {
                         return (
-                            <div key={index}>
-                                <p><strong>{item.title}</strong></p>
-                                <p>{item.url}</p>
+                            <div className="trend" key={index}>
+                                <img width="45px" height="45px" src="http://localhost:5173/src/assets/user.png" />
+                                <div>
+                                    <p><strong>{item.url}</strong></p>
+                                    <p>{item.title}</p>
+                                </div>
                             </div>
                         )
                     })}

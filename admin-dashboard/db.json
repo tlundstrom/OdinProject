@@ -62,22 +62,22 @@
       {
           "id": 1,
           "title": "World Peace Builder",
-          "userUrl": "@tegan"
+          "url": "@tegan"
       },
       {
           "id": 2,
           "title": "Super Cool Project",
-          "userUrl": "@morgan"
+          "url": "@morgan"
       },
       {
           "id": 3,
           "title": "Life Changing App",
-          "userUrl": "@kendall"
+          "url": "@kendall"
       },
       {
           "id": 4,
           "title": "No Traffic Maker",
-          "userUrl": "@alex"
+          "url": "@alex"
       }
   ]
 }
