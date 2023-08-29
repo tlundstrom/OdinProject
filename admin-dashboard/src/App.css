@@ -155,6 +155,7 @@ grid-row-gap: 15px;
 }
 
 button{
+  background-color: var(--primary) !important;
   margin: 0px 30px;
   border-radius: 30px !important;
   padding: 0.6em 1.5em !important;
@@ -206,4 +207,5 @@ button{
 
 .navigation{
   margin: 40px;
+  margin-top: 80px;
 }
