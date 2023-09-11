@@ -11,19 +11,19 @@ export default function Navigation({ activeTab, setActiveTab }: Iprops) {
 	};
 
 	return (
-		<Nav style={{ justifyContent: "center" }} tabs>
+		<Nav style={{ minWidth: "30%", justifyContent: "center" }} tabs>
 			<NavItem>
-				<NavLink active={activeTab === 1} onClick={() => toggleTab(1)} href="#">
+				<NavLink className="inactive" activeclassname="active" active={activeTab === 1} onClick={() => toggleTab(1)} href="#">
 					Home
 				</NavLink>
 			</NavItem>
-			<NavItem>
-				<NavLink active={activeTab === 2} onClick={() => toggleTab(2)} on href="#">
+			<NavItem style={{ margin: "0 4rem" }}>
+				<NavLink className="inactive" activeclassname="active" active={activeTab === 2} onClick={() => toggleTab(2)} on href="#">
 					Menu
 				</NavLink>
 			</NavItem>
 			<NavItem>
-				<NavLink active={activeTab === 3} onClick={() => toggleTab(3)} href="#">
+				<NavLink className="inactive" activeClassName="active" active={activeTab === 3} onClick={() => toggleTab(3)} href="#">
 					Contact
 				</NavLink>
 			</NavItem>

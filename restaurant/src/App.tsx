@@ -1,8 +1,8 @@
 import "./App.css";
 import Contact from "./components/Contact";
+import Header from "./components/Header";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
-import Navigation from "./components/Navigation";
 import { useState } from "react";
 
 function App() {
@@ -23,8 +23,7 @@ function App() {
 
 	return (
 		<>
-			<h1 style={{ textAlign: "center" }}>Restaurant...</h1>
-			<Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
+			<Header activeTab={activeTab} setActiveTab={setActiveTab} />
 			{renderSwitch(activeTab)}
 		</>
 	);

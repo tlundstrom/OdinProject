@@ -1,0 +1,30 @@
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("./assets/ronan-kruithof-PCE0T5i4pDI-unsplash.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
+	min-height: 100vh;
+}
+
+.inactive {
+	color: white !important;
+}
+
+.active {
+	color: black !important;
+}
+.wrapper {
+	max-width: 100vw;
+	height: calc(100vh - 10rem);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.Menu {
+	max-width: 1080px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	column-gap: 5rem;
+	row-gap: 5rem;
+}
