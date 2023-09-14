@@ -1,19 +1,38 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+	"todos": [
+		{
+			"title": "test",
+			"description": "test",
+			"dueDate": "2023-09-12T20:22:39.729Z",
+			"priority": "Low",
+			"id": 1,
+			"projectId": 1,
+			"complete": false
+		},
+		{
+			"title": "test2",
+			"description": "test",
+			"dueDate": "2023-09-13T20:22:39.729Z",
+			"priority": "High",
+			"id": 2,
+			"projectId": 0,
+			"complete": false
+		},
+		{
+			"title": "test3",
+			"description": "test2",
+			"dueDate": "2023-09-14T20:22:39.729Z",
+			"priority": "Low",
+			"id": 3,
+			"projectId": 1,
+			"complete": false
+		}
+	],
+	"projects": [
+		{
+			"name": "General Tasks",
+			"tasks": [1, 3],
+			"id": 1
+		}
+	]
 }
