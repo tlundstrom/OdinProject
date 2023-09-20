@@ -6,35 +6,32 @@ import { ITodoOutput } from "./interfaces/ITodoOutput";
 import { IProjectOutput } from "./interfaces/IprojectOutput";
 import DisplayAllTasks from "./components/DisplayAllTasks";
 import GetTasksByProject from "./components/GetTasksByProject";
+import axios from "axios";
 
 function App() {
-	const [todos, setTodos] = useState<ITodoOutput[]>([]);
-	const [openTodoModal, setOpenTodoModal] = useState(false);
-	const [projects, setProjects] = useState<IProjectOutput[]>([]);
+  const [todos, setTodos] = useState<ITodoOutput[]>([]);
+  const [openTodoModal, setOpenTodoModal] = useState(false);
+  const [projects, setProjects] = useState<IProjectOutput[]>([]);
 
-	useEffect(() => {
-		fetch("http://localhost:3000/projects")
-			.then((res) => res.json())
-			.then((data) => setProjects(data));
-	}, []);
+  useEffect(() => {
+    axios.get(`mongodb://localhost:27017/todos`).then((res) => setProjects(res.data));
+  }, []);
 
-	useEffect(() => {
-		fetch("http://localhost:3000/todos")
-			.then((res) => res.json())
-			.then((data) => setTodos(data));
-	}, []);
+  useEffect(() => {
+    axios.get(`mongodb://localhost:27017/todos`).then((res) => setTodos(res.data));
+  }, []);
 
-	const toggleModal = () => {
-		setOpenTodoModal((prevState) => !prevState);
-	};
-	return (
-		<>
-			<DisplayAllTasks todos={todos} />
-			<GetTasksByProject todos={todos} project={projects[0]} />
-			{/* <CreateTodo toggleModal={toggleModal} openTodoModal={openTodoModal} />
-			<Button onClick={toggleModal}>Create New Task</Button> */}
-		</>
-	);
+  const toggleModal = () => {
+    setOpenTodoModal((prevState) => !prevState);
+  };
+  return (
+    <>
+      {/* <DisplayAllTasks todos={todos} setTodos={setTodos} /> */}
+      <GetTasksByProject todos={todos} setTodos={setTodos} project={projects[0]} />
+      <CreateTodo toggleModal={toggleModal} openTodoModal={openTodoModal} />
+      <Button onClick={toggleModal}>Create New Task</Button>
+    </>
+  );
 }
 
 export default App;

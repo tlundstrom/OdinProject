@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { IProjectOutput } from "../interfaces/IprojectOutput";
 import { ITodoOutput } from "../interfaces/ITodoOutput";
 import { formatDate } from "../utilities/formatDate";
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "reactstrap";
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Button, Row } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { deleteFromDb } from "../utilities/deleteFromDb";
 
 interface IProps {
   todos: ITodoOutput[];
   project: IProjectOutput;
+  setTodos: (newTodos: ITodoOutput[]) => void;
 }
 
-const GetTasksByProject: React.FunctionComponent<IProps> = ({ todos, project }: IProps) => {
+const GetTasksByProject: React.FunctionComponent<IProps> = ({ todos, project, setTodos }: IProps) => {
   const [open, setOpen] = useState<string>("0");
   const toggle = (id: string) => {
     if (open === id) {
@@ -22,9 +24,12 @@ const GetTasksByProject: React.FunctionComponent<IProps> = ({ todos, project }: 
   };
   let filteredTodos = todos.filter((todo) => todo.projectId === project.id);
 
-  const handleDelete = (todo: ITodoOutput) => {
+  const handleDelete = (todoId: number) => {
     let newTodos: ITodoOutput[] = [...todos];
-    console.log(newTodos.indexOf(todo));
+    console.log(todoId);
+    deleteFromDb(todoId);
+    newTodos = newTodos.filter((p) => p.id !== todoId);
+    setTodos([...newTodos]);
   };
 
   let accordionCounter = 0;
@@ -40,7 +45,12 @@ const GetTasksByProject: React.FunctionComponent<IProps> = ({ todos, project }: 
           </AccordionHeader>
           <AccordionBody accordionId={accordionCounter.toString()}>
             <p>{todo.description}</p>
-            <FontAwesomeIcon onClick={() => handleDelete(todo)} className="fa" icon={faTrash} pull="right" />
+            <Row style={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button style={{ width: "7rem" }} onClick={() => handleDelete(todo.id)}>
+                <FontAwesomeIcon style={{ marginRight: "1rem" }} className="fa" icon={faTrash} />
+                Delete
+              </Button>
+            </Row>
           </AccordionBody>
         </AccordionItem>
       </Accordion>
