@@ -22,13 +22,13 @@ const GetTasksByProject: React.FunctionComponent<IProps> = ({ todos, project, se
       setOpen(id);
     }
   };
-  let filteredTodos = todos.filter((todo) => todo.projectId === project.id);
+  let filteredTodos = todos.filter((todo) => todo.projectId === project._id);
 
-  const handleDelete = (todoId: number) => {
+  const handleDelete = (todoId: string) => {
     let newTodos: ITodoOutput[] = [...todos];
     console.log(todoId);
     deleteFromDb(todoId);
-    newTodos = newTodos.filter((p) => p.id !== todoId);
+    newTodos = newTodos.filter((p) => p._id !== todoId);
     setTodos([...newTodos]);
   };
 
@@ -38,7 +38,7 @@ const GetTasksByProject: React.FunctionComponent<IProps> = ({ todos, project, se
     accordionCounter++;
     return (
       //@ts-ignore
-      <Accordion key={todo.title + todo.id} style={{ width: "20rem" }} open={open} toggle={toggle}>
+      <Accordion key={todo_id} style={{ width: "20rem" }} open={open} toggle={toggle}>
         <AccordionItem>
           <AccordionHeader targetId={accordionCounter.toString()}>
             {todo.title} Due:{formatDate(todo.dueDate)}
@@ -46,7 +46,7 @@ const GetTasksByProject: React.FunctionComponent<IProps> = ({ todos, project, se
           <AccordionBody accordionId={accordionCounter.toString()}>
             <p>{todo.description}</p>
             <Row style={{ display: "flex", justifyContent: "flex-end" }}>
-              <Button style={{ width: "7rem" }} onClick={() => handleDelete(todo.id)}>
+              <Button style={{ width: "7rem" }} onClick={() => handleDelete(todo._id)}>
                 <FontAwesomeIcon style={{ marginRight: "1rem" }} className="fa" icon={faTrash} />
                 Delete
               </Button>

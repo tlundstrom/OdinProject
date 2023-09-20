@@ -13,12 +13,12 @@ function App() {
   const [openTodoModal, setOpenTodoModal] = useState(false);
   const [projects, setProjects] = useState<IProjectOutput[]>([]);
 
-  useEffect(() => {
-    axios.get(`mongodb://localhost:27017/todos`).then((res) => setProjects(res.data));
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`mongodb://localhost:3030/api/taks`).then((res) => setProjects(res.data));
+  // }, []);
 
   useEffect(() => {
-    axios.get(`mongodb://localhost:27017/todos`).then((res) => setTodos(res.data));
+    axios.get(`http://localhost:3030/api/tasks/`).then((res) => setTodos(res.data));
   }, []);
 
   const toggleModal = () => {
@@ -26,9 +26,9 @@ function App() {
   };
   return (
     <>
-      {/* <DisplayAllTasks todos={todos} setTodos={setTodos} /> */}
-      <GetTasksByProject todos={todos} setTodos={setTodos} project={projects[0]} />
-      <CreateTodo toggleModal={toggleModal} openTodoModal={openTodoModal} />
+      <DisplayAllTasks todos={todos} setTodos={setTodos} />
+      {/* <GetTasksByProject todos={todos} setTodos={setTodos} project={projects[0]} /> */}
+      <CreateTodo toggleModal={toggleModal} openTodoModal={openTodoModal} todos={todos} setTodos={setTodos} />
       <Button onClick={toggleModal}>Create New Task</Button>
     </>
   );

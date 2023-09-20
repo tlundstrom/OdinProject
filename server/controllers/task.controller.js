@@ -15,8 +15,8 @@ module.exports = {
 
   getAllTasks: (req, res) => {
     Task.find({})
-      .then((task) => {
-        res.json(task);
+      .then((tasks) => {
+        res.json(tasks);
       })
       .catch((err) => {
         return res.status(400).json({ message: "Something went wrong finding all the items.", error: err });
@@ -24,7 +24,7 @@ module.exports = {
   },
 
   getOneTask: (req, res) => {
-    Task.findById({ _id: req.params.id })
+    Task.findById(req.params.id)
       .then((task) => {
         return res.json(task);
       })
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   updateOneTask: (req, res) => {
-    Task.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
+    Task.findByIdAndUpdate(_id, req.body, { new: true, runValidators: true })
       .then((updatedTask) => {
         return res.json(updatedTask);
       })
@@ -48,6 +48,7 @@ module.exports = {
       .then((deleted) => {
         return res.json(deleted);
       })
+
       .catch((err) => {
         return res.status(400).json({ message: "Something went wrong deleting that item.", error: err });
       });

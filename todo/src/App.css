@@ -1,6 +1,32 @@
 .card-header .fa {
-	transition: 0.3s transform ease-in-out;
+  transition: 0.3s transform ease-in-out;
 }
 .card-header .collapsed .fa {
-	transform: rotate(90deg) !important;
+  transform: rotate(90deg) !important;
+}
+
+.GridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+  margin: 0 auto;
+  width: fit-content;
+  height: 100vh;
+}
+
+.todoGrid {
+  grid-area: 1 / 1 / 2 / 4;
+}
+
+.lowPriority > div > div > h2 > button {
+  background-color: rgb(40, 167, 69) !important;
+}
+
+.medPriority > div > div > h2 > button {
+  background-color: rgb(255, 193, 7) !important;
+}
+.highPriority > div > div > h2 > button {
+  background-color: rgb(220, 53, 69) !important;
 }

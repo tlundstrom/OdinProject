@@ -3,33 +3,46 @@ import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFoot
 import { ITodoInput } from "../interfaces/ITodoInput";
 import DatePicker from "react-datepicker";
 import axios from "axios";
+import { ITodoOutput } from "../interfaces/ITodoOutput";
 
 const initalFormState: ITodoInput = {
   title: "",
   description: "",
   dueDate: new Date(),
   priority: "Low",
-  projectId: 1,
   complete: false,
 };
 
 interface IProps {
   openTodoModal: boolean;
   toggleModal: () => void;
+  todos: ITodoOutput[];
+  setTodos: (newTodo: ITodoOutput[]) => void;
 }
+const initalResponseState: ITodoOutput = {
+  title: "",
+  description: "",
+  dueDate: new Date(),
+  priority: "Low",
+  complete: false,
+  projectId: "",
+  _id: "",
+};
 
-function postForm(body: ITodoInput) {
-  axios
-    .post(`http://localhost:3030/todos`, body)
-    .then((res) => console.log(res))
-    .catch((error) => console.log(error));
-}
-
-export default function CreateTodo({ openTodoModal, toggleModal }: IProps) {
+export default function CreateTodo({ openTodoModal, toggleModal, todos, setTodos }: IProps) {
   const [formData, setFormData] = useState<ITodoInput>(initalFormState);
+  const [response, setResponse] = useState<ITodoOutput>(initalResponseState);
+  console.log(todos);
+  function postForm(body: ITodoInput) {
+    axios
+      .post(`http://localhost:3030/api/tasks`, body)
+      .then((res) => setTodos([...todos, res.data]))
+      .catch((error) => console.log(error));
+  }
 
   const handleSubmit = (formData: ITodoInput) => {
     postForm(formData);
+
     setFormData(initalFormState);
     toggleModal();
   };
