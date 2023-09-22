@@ -1,15 +1,15 @@
 import { Button } from "reactstrap";
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import CreateTodo from "./components/CreateTodo";
-import { ITodoOutput } from "./interfaces/ITodoOutput";
+import CreateTodo from "./components/CreateTask";
+import { ITaskOutput } from "./interfaces/ITaskOutput";
 import { IProjectOutput } from "./interfaces/IprojectOutput";
 import DisplayAllTasks from "./components/DisplayAllTasks";
 import GetTasksByProject from "./components/GetTasksByProject";
 import axios from "axios";
 
 function App() {
-  const [todos, setTodos] = useState<ITodoOutput[]>([]);
+  const [todos, setTodos] = useState<ITaskOutput[]>([]);
   const [openTodoModal, setOpenTodoModal] = useState(false);
   const [projects, setProjects] = useState<IProjectOutput[]>([]);
 

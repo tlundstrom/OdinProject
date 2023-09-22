@@ -9,7 +9,7 @@ module.exports = {
         return res.json(task);
       })
       .catch((err) => {
-        return res.status(400).json(err);
+        return res.status(400).json({ message: "Something went wrong creating a task.", error: err });
       });
   },
 
@@ -19,7 +19,7 @@ module.exports = {
         res.json(tasks);
       })
       .catch((err) => {
-        return res.status(400).json({ message: "Something went wrong finding all the items.", error: err });
+        return res.status(400).json({ message: "Something went wrong finding all the tasks.", error: err });
       });
   },
 
@@ -29,7 +29,7 @@ module.exports = {
         return res.json(task);
       })
       .catch((err) => {
-        return res.status(400).json({ message: "Something went wrong finding that item.", error: err });
+        return res.status(400).json({ message: "Something went wrong finding that task.", error: err });
       });
   },
 
@@ -50,7 +50,7 @@ module.exports = {
       })
 
       .catch((err) => {
-        return res.status(400).json({ message: "Something went wrong deleting that item.", error: err });
+        return res.status(400).json({ message: "Something went wrong deleting that task.", error: err });
       });
   },
 };

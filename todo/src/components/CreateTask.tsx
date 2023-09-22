@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { ITodoInput } from "../interfaces/ITodoInput";
+import { ITaskInput } from "../interfaces/ITaskInput";
 import DatePicker from "react-datepicker";
 import axios from "axios";
-import { ITodoOutput } from "../interfaces/ITodoOutput";
+import { ITaskOutput } from "../interfaces/ITaskOutput";
 
-const initalFormState: ITodoInput = {
+const initalFormState: ITaskInput = {
   title: "",
   description: "",
   dueDate: new Date(),
@@ -16,31 +16,20 @@ const initalFormState: ITodoInput = {
 interface IProps {
   openTodoModal: boolean;
   toggleModal: () => void;
-  todos: ITodoOutput[];
-  setTodos: (newTodo: ITodoOutput[]) => void;
+  todos: ITaskOutput[];
+  setTodos: (newTodo: ITaskOutput[]) => void;
 }
-const initalResponseState: ITodoOutput = {
-  title: "",
-  description: "",
-  dueDate: new Date(),
-  priority: "Low",
-  complete: false,
-  projectId: "",
-  _id: "",
-};
 
-export default function CreateTodo({ openTodoModal, toggleModal, todos, setTodos }: IProps) {
-  const [formData, setFormData] = useState<ITodoInput>(initalFormState);
-  const [response, setResponse] = useState<ITodoOutput>(initalResponseState);
-  console.log(todos);
-  function postForm(body: ITodoInput) {
+export default function CreateTask({ openTodoModal, toggleModal, todos, setTodos }: IProps) {
+  const [formData, setFormData] = useState<ITaskInput>(initalFormState);
+  function postForm(body: ITaskInput) {
     axios
       .post(`http://localhost:3030/api/tasks`, body)
       .then((res) => setTodos([...todos, res.data]))
       .catch((error) => console.log(error));
   }
 
-  const handleSubmit = (formData: ITodoInput) => {
+  const handleSubmit = (formData: ITaskInput) => {
     postForm(formData);
 
     setFormData(initalFormState);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ITodoOutput } from "../interfaces/ITodoOutput";
+import { ITaskOutput } from "../interfaces/ITaskOutput";
 import { formatDate } from "../utilities/formatDate";
 import { Accordion, AccordionItem, AccordionHeader, AccordionBody, Button, Row } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,8 +7,8 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { deleteFromDb } from "../utilities/deleteFromDb";
 
 interface IProps {
-  todos: ITodoOutput[];
-  setTodos: (newTodos: ITodoOutput[]) => void;
+  todos: ITaskOutput[];
+  setTodos: (newTodos: ITaskOutput[]) => void;
 }
 
 const DisplayAllTasks: React.FunctionComponent<IProps> = ({ todos, setTodos }: IProps) => {
@@ -22,7 +22,7 @@ const DisplayAllTasks: React.FunctionComponent<IProps> = ({ todos, setTodos }: I
   };
 
   const handleDelete = (todoId: string) => {
-    let newTodos: ITodoOutput[] = [...todos];
+    let newTodos: ITaskOutput[] = [...todos];
     deleteFromDb(todoId);
     newTodos = newTodos.filter((p) => p._id !== todoId);
     setTodos([...newTodos]);

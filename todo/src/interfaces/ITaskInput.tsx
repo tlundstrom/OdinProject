@@ -1,4 +1,4 @@
-export interface ITodoInput {
+export interface ITaskInput {
   title: string;
   description: string;
   dueDate: Date;
