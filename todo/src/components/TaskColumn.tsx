@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Button, Row } from "reactstrap";
+import React, { useState } from "react";
+import { Accordion } from "reactstrap";
 import { ITaskOutput } from "../interfaces/ITaskOutput";
-import { formatDate } from "../utilities/formatDate";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { deleteFromDb } from "../utilities/deleteFromDb";
 import EditTask from "./EditTask";
 import TaskCard from "./TaskCard";
+import { Droppable } from "react-beautiful-dnd";
 interface IProps {
   priority: string;
   tasks: ITaskOutput[];
@@ -17,6 +15,14 @@ interface IProps {
 export function TaskColumn({ priority, tasks, setTasks, toggleUpdated }: IProps) {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editTask, setEditTask] = useState<ITaskOutput>();
+  const [open, setOpen] = useState<string>("0");
+  const toggle = (id: string) => {
+    if (open === id) {
+      setOpen("");
+    } else {
+      setOpen(id);
+    }
+  };
 
   const toggleModal = () => {
     setOpenEditModal((prevState) => !prevState);
@@ -37,12 +43,25 @@ export function TaskColumn({ priority, tasks, setTasks, toggleUpdated }: IProps)
   return (
     <div className={priority + "Priority"}>
       <h3 style={{ textAlign: "center" }}>{priority} Priority</h3>
-      {filteredColumn.map((task) => {
-        return (
-          //@ts-ignore
-          <TaskCard key={task._id} task={task} handleDelete={handleDelete} handleEdit={handleEdit} />
-        );
-      })}
+      <Droppable droppableId="priorityList">
+        {(provided) => (
+          <ul {...provided.droppableProps} ref={provided.innerRef} style={{ listStyle: "none" }}>
+            {
+              //@ts-ignore
+              <Accordion className="priorityList" style={{ width: "20rem" }} open={open} toggle={toggle}>
+                {filteredColumn.map((task, index) => {
+                  return (
+                    <React.Fragment key={task._id}>
+                      <TaskCard index={index} task={task} handleDelete={handleDelete} handleEdit={handleEdit} />
+                    </React.Fragment>
+                  );
+                })}
+              </Accordion>
+            }
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
       {editTask ? (
         <EditTask openEditModal={openEditModal} toggleModal={toggleModal} tasks={tasks} toggleUpdated={toggleUpdated} editTask={editTask} />
       ) : null}
