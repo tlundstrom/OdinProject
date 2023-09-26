@@ -20,13 +20,13 @@
   grid-area: 1 / 1 / 2 / 4;
 }
 
-.lowPriority > div > div > h2 > button {
+.LowPriority > div > div > h2 > button {
   background-color: rgb(40, 167, 69) !important;
 }
 
-.medPriority > div > div > h2 > button {
+.MediumPriority > div > div > h2 > button {
   background-color: rgb(255, 193, 7) !important;
 }
-.highPriority > div > div > h2 > button {
+.HighPriority > div > div > h2 > button {
   background-color: rgb(220, 53, 69) !important;
 }

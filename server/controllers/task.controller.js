@@ -34,7 +34,7 @@ module.exports = {
   },
 
   updateOneTask: (req, res) => {
-    Task.findByIdAndUpdate(_id, req.body, { new: true, runValidators: true })
+    Task.findByIdAndUpdate(req.params.id, req.body)
       .then((updatedTask) => {
         return res.json(updatedTask);
       })

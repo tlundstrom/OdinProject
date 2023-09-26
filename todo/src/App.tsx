@@ -1,4 +1,4 @@
-import { Button } from "reactstrap";
+import { Button, Form, Input, Label } from "reactstrap";
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import CreateTodo from "./components/CreateTask";
@@ -9,27 +9,57 @@ import GetTasksByProject from "./components/GetTasksByProject";
 import axios from "axios";
 
 function App() {
-  const [todos, setTodos] = useState<ITaskOutput[]>([]);
-  const [openTodoModal, setOpenTodoModal] = useState(false);
+  const [tasks, setTasks] = useState<ITaskOutput[]>([]);
+  const [openTaskModal, setOpenTaskModal] = useState(false);
   const [projects, setProjects] = useState<IProjectOutput[]>([]);
-
-  // useEffect(() => {
-  //   axios.get(`mongodb://localhost:3030/api/taks`).then((res) => setProjects(res.data));
-  // }, []);
+  const [updated, setUpdated] = useState(false);
+  const [filtered, setFiltered] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<string>();
 
   useEffect(() => {
-    axios.get(`http://localhost:3030/api/tasks/`).then((res) => setTodos(res.data));
+    axios.get(`http://localhost:3030/api/projects`).then((res) => setProjects(res.data));
   }, []);
 
+  useEffect(() => {
+    axios.get(`http://localhost:3030/api/tasks/`).then((res) => setTasks(res.data));
+  }, [updated]);
+
+  const toggleUpdated = () => {
+    setUpdated((prevState) => !prevState);
+  };
+
   const toggleModal = () => {
-    setOpenTodoModal((prevState) => !prevState);
+    setOpenTaskModal((prevState) => !prevState);
+  };
+
+  const handleSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    e.target.value === "0" ? setFiltered(false) : setFiltered(true);
+    setSelectedProject(e.target.value);
   };
   return (
     <>
-      <DisplayAllTasks todos={todos} setTodos={setTodos} />
-      {/* <GetTasksByProject todos={todos} setTodos={setTodos} project={projects[0]} /> */}
-      <CreateTodo toggleModal={toggleModal} openTodoModal={openTodoModal} todos={todos} setTodos={setTodos} />
-      <Button onClick={toggleModal}>Create New Task</Button>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Button style={{ marginRight: "1rem" }} onClick={toggleModal}>
+          Create New Task
+        </Button>
+        <Form>
+          <Input onChange={(e) => handleSelection(e)} type="select">
+            <option value="0">All Tasks</option>
+            {projects.map((project) => (
+              <option style={{ marginBottom: "0" }} key={project._id} value={project._id}>
+                {project.name}
+              </option>
+            ))}
+          </Input>
+        </Form>
+      </div>
+      {filtered && selectedProject ? (
+        <GetTasksByProject tasks={tasks} setTasks={setTasks} project={selectedProject} toggleUpdated={toggleUpdated} />
+      ) : (
+        <DisplayAllTasks toggleUpdated={toggleUpdated} tasks={tasks} setTasks={setTasks} />
+      )}
+      <CreateTodo toggleModal={toggleModal} openTaskModal={openTaskModal} tasks={tasks} setTasks={setTasks} projects={projects} />
     </>
   );
 }

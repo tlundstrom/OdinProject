@@ -20,7 +20,6 @@ const TaskSchema = new Schema({
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Project",
-    default: "650b19db3101f55dd920739a",
   },
   complete: {
     type: Boolean,

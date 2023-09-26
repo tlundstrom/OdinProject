@@ -4,4 +4,5 @@ export interface ITaskInput {
   dueDate: Date;
   priority: string;
   complete: boolean;
+  projectId?: string;
 }
