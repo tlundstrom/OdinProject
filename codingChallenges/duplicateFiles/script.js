@@ -8,7 +8,6 @@ var findDuplicate = function (paths) {
       const closeParen = files[i].indexOf(")");
       const textContent = files[i].slice(openParen + 1, closeParen);
       const fileName = files[i].slice(0, openParen);
-      console.log(fileName);
       if (fileMap.has(textContent)) {
         let filesList = fileMap.get(textContent) ?? [];
         filesList.push(directory + "/" + fileName);
