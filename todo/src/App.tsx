@@ -33,7 +33,6 @@ function App() {
   };
 
   const handleSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     e.target.value === "0" ? setFiltered(false) : setFiltered(true);
     setSelectedProject(e.target.value);
   };

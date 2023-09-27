@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Accordion } from "reactstrap";
 import { ITaskOutput } from "../interfaces/ITaskOutput";
 import { deleteFromDb } from "../utilities/deleteFromDb";
@@ -6,16 +6,17 @@ import EditTask from "./EditTask";
 import TaskCard from "./TaskCard";
 import { Droppable } from "react-beautiful-dnd";
 interface IProps {
-  priority: string;
   tasks: ITaskOutput[];
   setTasks: (newTasks: ITaskOutput[]) => void;
   toggleUpdated: () => void;
+  column: { name: string; id: string; taskIds: string[] };
 }
 
-export function TaskColumn({ priority, tasks, setTasks, toggleUpdated }: IProps) {
+export function TaskColumn({ tasks, setTasks, toggleUpdated, column }: IProps) {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editTask, setEditTask] = useState<ITaskOutput>();
   const [open, setOpen] = useState<string>("0");
+  const [filteredColumn, setFilteredColumn] = useState<ITaskOutput[]>();
   const toggle = (id: string) => {
     if (open === id) {
       setOpen("");
@@ -39,17 +40,31 @@ export function TaskColumn({ priority, tasks, setTasks, toggleUpdated }: IProps)
     setEditTask(task);
     toggleModal();
   };
-  const filteredColumn = tasks.filter((task) => task.priority === priority);
+
+  function GetFilteredColumn() {
+    let newFilteredCol = [];
+
+    for (let taskId of column.taskIds) {
+      let res = tasks.filter((p) => p._id === taskId);
+
+      newFilteredCol.push(res[0]);
+    }
+    setFilteredColumn([...newFilteredCol]);
+  }
+
+  useEffect(() => {
+    GetFilteredColumn();
+  }, [column]);
   return (
-    <div className={priority + "Priority"}>
-      <h3 style={{ textAlign: "center" }}>{priority} Priority</h3>
-      <Droppable droppableId="priorityList">
+    <div className={column.name + "Priority"}>
+      <h3 style={{ textAlign: "center" }}>{column.name} Priority</h3>
+      <Droppable droppableId={column.id}>
         {(provided) => (
           <ul {...provided.droppableProps} ref={provided.innerRef} style={{ listStyle: "none" }}>
-            {
-              //@ts-ignore
+            {filteredColumn && (
+              // @ts-ignore
               <Accordion className="priorityList" style={{ width: "20rem" }} open={open} toggle={toggle}>
-                {filteredColumn.map((task, index) => {
+                {filteredColumn!.map((task, index) => {
                   return (
                     <React.Fragment key={task._id}>
                       <TaskCard index={index} task={task} handleDelete={handleDelete} handleEdit={handleEdit} />
@@ -57,14 +72,14 @@ export function TaskColumn({ priority, tasks, setTasks, toggleUpdated }: IProps)
                   );
                 })}
               </Accordion>
-            }
+            )}
             {provided.placeholder}
           </ul>
         )}
       </Droppable>
-      {editTask ? (
+      {editTask && (
         <EditTask openEditModal={openEditModal} toggleModal={toggleModal} tasks={tasks} toggleUpdated={toggleUpdated} editTask={editTask} />
-      ) : null}
+      )}
     </div>
   );
 }
