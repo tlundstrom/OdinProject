@@ -62,13 +62,11 @@ const DisplayAllTasks: React.FunctionComponent<IProps> = ({ tasks, setTasks, tog
         ...start,
         taskIds: newTaskIds,
       };
-      console.log(newColumn);
 
       setColumns({
         ...columns,
         [newColumn.id]: newColumn,
       });
-      console.log(columns);
     } else {
       const startTaskIds = Array.from(start.taskIds);
       startTaskIds.splice(source.index, 1);
