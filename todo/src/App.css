@@ -6,10 +6,33 @@
   grid-row-gap: 0px;
   margin: 0 auto;
   width: fit-content;
-  height: 100vh;
+  height: calc(100vh - 150px);
   text-align: center;
 }
 
 .TaskGrid {
-  grid-area: 1 / 1 / 2 / 4;
+  min-width: 20rem;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h3 {
+  color: white !important;
+}
+
+#root {
+  background-color: #333333;
+}
+.card-body > p {
+  text-align: left;
+  color: black;
+}
+.card {
+  margin-bottom: 10px;
+}
+.modal > * {
+  color: black;
 }
