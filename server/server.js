@@ -15,5 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 require("./config/mongoose.config");
 require("./routes/tasks.routes")(app);
 require("./routes/projects.routes")(app);
+require("./routes/columns.routes")(app);
 
 app.listen(port, () => console.log(`Listening on port: 3030`));

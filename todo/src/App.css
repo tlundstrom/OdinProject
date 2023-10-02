@@ -1,10 +1,3 @@
-.card-header .fa {
-  transition: 0.3s transform ease-in-out;
-}
-.card-header .collapsed .fa {
-  transform: rotate(90deg) !important;
-}
-
 .GridContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -14,19 +7,9 @@
   margin: 0 auto;
   width: fit-content;
   height: 100vh;
+  text-align: center;
 }
 
-.todoGrid {
+.TaskGrid {
   grid-area: 1 / 1 / 2 / 4;
-}
-
-.LowPriority > div > div > h2 > button {
-  background-color: rgb(40, 167, 69) !important;
-}
-
-.MediumPriority > div > div > h2 > button {
-  background-color: rgb(255, 193, 7) !important;
-}
-.HighPriority > div > div > h2 > button {
-  background-color: rgb(220, 53, 69) !important;
 }

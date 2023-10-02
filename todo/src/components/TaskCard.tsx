@@ -8,12 +8,10 @@ import { Draggable } from "react-beautiful-dnd";
 
 interface IProps {
   task: ITaskOutput;
-  handleEdit: (task: ITaskOutput) => void;
-  handleDelete: (id: string) => void;
   index: number;
 }
 
-export default function TaskCard({ task, handleEdit, handleDelete, index }: IProps) {
+export default function TaskCard({ task, index }: IProps) {
   const [collapse, setCollapse] = useState(false);
   const toggle = () => {
     setCollapse((prevState) => !prevState);
@@ -30,11 +28,11 @@ export default function TaskCard({ task, handleEdit, handleDelete, index }: IPro
               <CardBody>
                 <p>{task.description}</p>
                 <Row style={{ display: "flex", justifyContent: "flex-end" }}>
-                  <Button onClick={() => handleEdit(task)} style={{ width: "7rem", marginRight: "1rem" }}>
+                  <Button style={{ width: "7rem", marginRight: "1rem" }}>
                     <FontAwesomeIcon style={{ marginRight: "1rem" }} className="fa" icon={faPenToSquare} />
                     Edit
                   </Button>
-                  <Button color="danger" style={{ width: "7rem" }} onClick={() => handleDelete(task._id)}>
+                  <Button color="danger" style={{ width: "7rem" }}>
                     <FontAwesomeIcon style={{ marginRight: "1rem" }} className="fa" icon={faTrash} />
                     Delete
                   </Button>

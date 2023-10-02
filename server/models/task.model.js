@@ -14,9 +14,6 @@ const TaskSchema = new Schema({
     type: Date,
     required: [true, "Task due date is required."],
   },
-  priority: {
-    type: String,
-  },
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Project",
