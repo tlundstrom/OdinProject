@@ -40,7 +40,7 @@ export default function TaskCard({ task, index, handleDelete, handleEdit, projec
               <Collapse isOpen={collapse}>
                 <CardBody>
                   <p>{task.description}</p>
-                  <Row style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <Row style={{ display: "flex", justifyContent: "center" }}>
                     <Button onClick={() => toggleModal()} style={{ width: "7rem", marginRight: "1rem" }}>
                       <FontAwesomeIcon style={{ marginRight: "1rem" }} className="fa" icon={faPenToSquare} />
                       Edit
