@@ -77,5 +77,3 @@ function traverse(node) {
     };
   }
 }
-
-console.log(tree.root);
