@@ -6,13 +6,11 @@ interface IProps {
   setUnit: (newUnit: boolean) => void;
 }
 
-const DisplayWeather = ({ weather, unit, setUnit }: IProps) => {
+const DisplayWeather = ({ weather, unit }: IProps) => {
   const isUSA = (weather: IWeather) => {
     if (weather.location.country === "United States of America" || weather.location.country === "USA") {
-      setUnit(false);
       return weather.location.region;
     }
-    setUnit(true);
     return weather.location.country;
   };
 
