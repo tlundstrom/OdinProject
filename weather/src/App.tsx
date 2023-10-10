@@ -108,7 +108,7 @@ function App() {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} className="weatherDisplay">
-        {weather && <DisplayWeather unit={unit} weather={weather} />}
+        {weather && <DisplayWeather setUnit={setUnit} unit={unit} weather={weather} />}
       </div>
     </div>
   );

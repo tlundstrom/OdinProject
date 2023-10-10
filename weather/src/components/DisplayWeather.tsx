@@ -3,16 +3,19 @@ import { IWeather } from "../App";
 interface IProps {
   unit: boolean;
   weather: IWeather;
+  setUnit: (newUnit: boolean) => void;
 }
 
-const isUSA = (weather: IWeather) => {
-  if (weather.location.country === "United States of America") {
-    return weather.location.region;
-  }
-  return weather.location.country;
-};
+const DisplayWeather = ({ weather, unit, setUnit }: IProps) => {
+  const isUSA = (weather: IWeather) => {
+    if (weather.location.country === "United States of America" || weather.location.country === "USA") {
+      setUnit(false);
+      return weather.location.region;
+    }
+    setUnit(true);
+    return weather.location.country;
+  };
 
-const DisplayWeather = ({ weather, unit }: IProps) => {
   return (
     <>
       <h1>
