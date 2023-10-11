@@ -1,0 +1,29 @@
+.parent {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 1000px;
+  height: 1000px;
+}
+#chess div {
+  border: 1px solid black;
+  background-color: black;
+  overflow: visible;
+}
+
+#chess div:nth-of-type(16n + 16),
+#chess div:nth-of-type(16n + 14),
+#chess div:nth-of-type(16n + 12),
+#chess div:nth-of-type(16n + 10),
+#chess div:nth-of-type(16n + 7),
+#chess div:nth-of-type(16n + 5),
+#chess div:nth-of-type(16n + 3),
+#chess div:nth-of-type(16n + 1) {
+  background-color: white;
+}
+
+.glow {
+  box-shadow: inset 0 0 5px 5px #48abe0, inset 0 0 7px 10px #8a2be2;
+}
