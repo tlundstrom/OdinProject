@@ -1,42 +1,47 @@
-div{
-    box-sizing: border-box;
+div {
+  box-sizing: border-box;
 }
 
-body{
-    background-color: darkgray;
+body {
+  background-color: darkgray;
 }
 
-#window{
-    display: grid;
-    width: 480px;
-    height: 480px;
-    background-color: white;
+#window {
+  display: grid;
+  width: 480px;
+  height: 480px;
+  background-color: white;
 }
 
-header{
-    text-align: center;
-    margin: 25px;
+header {
+  text-align: center;
+  margin: 25px;
 }
 
-.cell{
-    border: .1px solid gray;
+.cell {
+  border: 0.1px solid gray;
 }
 
-.main-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.etchasketch, .controls{
-    display: flex;
+.etchasketch,
+.controls {
+  display: flex;
 }
 
-.controls{
-    flex-direction: column;
-    justify-content: center;
+.controls {
+  flex-direction: column;
+  justify-content: center;
 }
 
-.btn{
-    margin: 10px 100px;
+.btn {
+  margin: 10px 100px;
+}
+
+#colorPicker {
+  margin: 0 auto;
 }
