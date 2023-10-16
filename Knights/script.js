@@ -28,14 +28,16 @@ const KnightTravails = ([x, y], [a, b]) => {
     });
     currentNode = queue.shift();
   }
-
-  alert(
-    `You made it in ${currentNode.path.length - 1} moves!`
-    // "\n",
-    // `Here's your path:${currentNode.path.map((position) => {
-    //   return position;
-    // })}`
+  $(".modal-body").text(
+    `You made it in ${currentNode.path.length - 1} moves!` +
+      "\n" +
+      `Here's your path:` +
+      currentNode.path.map((position) => {
+        return `[${position}]`;
+      }) +
+      `.`
   );
+  $("#Modal").modal("show");
 };
 
 function addGlow(element) {
@@ -51,6 +53,7 @@ function getCoordinates(e) {
   if (startPosition[0] || startPosition[0] === 0) {
     endPosition[0] = parseInt(x);
     endPosition[1] = parseInt(y);
+    addGlow(e.target);
     KnightTravails(startPosition, endPosition);
   } else {
     startPosition[0] = parseInt(x);
@@ -60,15 +63,26 @@ function getCoordinates(e) {
   }
 }
 const chessboard = document.getElementById("chess");
-for (var i = 0; i < 8; i++) {
-  for (var j = 0; j < 8; j++) {
-    var chessSquare = document.createElement("div");
-    chessSquare.className = "chess-square";
-    chessSquare.setAttribute("x", i);
-    chessSquare.setAttribute("y", j);
-    chessSquare.addEventListener("click", (e) => {
-      getCoordinates(e);
-    });
-    chessboard.appendChild(chessSquare);
+const buildChessBoard = () => {
+  for (var i = 0; i < 8; i++) {
+    for (var j = 0; j < 8; j++) {
+      var chessSquare = document.createElement("div");
+      chessSquare.className = "chess-square";
+      chessSquare.setAttribute("x", i);
+      chessSquare.setAttribute("y", j);
+      chessSquare.addEventListener("click", (e) => {
+        getCoordinates(e);
+      });
+      chessboard.appendChild(chessSquare);
+    }
   }
-}
+};
+buildChessBoard();
+
+const closeModal = () => {
+  chessboard.innerHTML = "";
+  buildChessBoard();
+  startPosition = [];
+  endPosition = [];
+  $("#Modal").modal("toggle");
+};
