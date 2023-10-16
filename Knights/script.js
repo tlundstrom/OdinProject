@@ -58,7 +58,6 @@ function getCoordinates(e) {
   } else {
     startPosition[0] = parseInt(x);
     startPosition[1] = parseInt(y);
-    console.log(startPosition);
     addGlow(e.target);
   }
 }
@@ -68,8 +67,8 @@ const buildChessBoard = () => {
     for (var j = 0; j < 8; j++) {
       var chessSquare = document.createElement("div");
       chessSquare.className = "chess-square";
-      chessSquare.setAttribute("x", i);
-      chessSquare.setAttribute("y", j);
+      chessSquare.setAttribute("y", i);
+      chessSquare.setAttribute("x", j);
       chessSquare.addEventListener("click", (e) => {
         getCoordinates(e);
       });
