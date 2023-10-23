@@ -140,13 +140,13 @@ const FieldHover = styled.div<IFieldHover>`
     ${({ isVertical, shipLength }) =>
       isVertical &&
       css`
-        height: calc(3rem + 3rem * ${shipLength - 1});
+        height: calc(3rem * ${shipLength});
       `}
 
     ${({ isVertical, shipLength }) =>
       !isVertical &&
       css`
-        width: calc(3rem + 3rem * ${shipLength - 1});
+        width: calc(3rem * ${shipLength});
       `}
   }
 `;
