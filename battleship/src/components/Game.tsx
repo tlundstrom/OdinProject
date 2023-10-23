@@ -4,6 +4,9 @@ import Gameboard from "../utilities/Gameboard";
 import Player from "../utilities/Player";
 import styled from "styled-components";
 import Board from "./Board";
+import Placement from "./Placement";
+import GameOver from "./GameOver";
+import { createSeekStack } from "../utilities/battleshipAI";
 
 export default function Game() {
   const [player, setPlayer] = useState(new Player("player"));
@@ -12,6 +15,7 @@ export default function Game() {
   const [cpuBoard, setCpuBoard] = useState(new Gameboard());
   const [gameOverMSG, setGameOverMSG] = useState("");
   const [gameOver, setGameOver] = useState(false);
+  const [gameStart, setGameStart] = useState(false);
 
   useEffect(() => {
     createCpuBoard();
@@ -23,8 +27,9 @@ export default function Game() {
     setCpuBoard(newBoard);
   };
 
+  createSeekStack();
+
   const handleCellClick = (x: number, y: number) => {
-    console.log(`[${x}, ${y}]`);
     if (player.hasHit(x, y)) return;
 
     let playerCopy: Player = Object.assign(Object.create(Object.getPrototypeOf(player)), player);
@@ -58,10 +63,13 @@ export default function Game() {
     createCpuBoard();
     setGameOverMSG("");
     setGameOver(false);
+    setGameStart(false);
   };
 
   return (
     <>
+      {gameStart ? "" : <Placement setGameStart={setGameStart} playerBoard={playerBoard} setPlayerBoard={setPlayerBoard} />}
+      {gameOver ? <GameOver gameOverMSG={gameOverMSG} newGame={newGame} /> : ""}
       <Boards>
         <Board gameboard={playerBoard} owner={player} enemy={cpu} />
         <Board gameboard={cpuBoard} owner={cpu} enemy={player} onCellClick={handleCellClick} />

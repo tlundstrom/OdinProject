@@ -1,11 +1,15 @@
 import Gameboard from "./Gameboard";
 
+import { smartAttack, pushToStackonHit } from "./battleshipAI";
+
 class Player {
   name: string;
   hits: number[][];
+  seekmode: boolean;
   constructor(name: string) {
     this.name = name;
     this.hits = [];
+    this.seekmode = true;
   }
 
   attack(xpos: number, ypos: number, gameboard: Gameboard) {
@@ -18,15 +22,15 @@ class Player {
   cpuAttack(gameboard: Gameboard) {
     if (this.hits.length === 100) return;
 
-    let xpos = Math.floor(Math.random() * 10);
-    let ypos = Math.floor(Math.random() * 10);
+    let attackCoods = smartAttack(this.seekmode);
+    let xpos = attackCoods[0];
+    let ypos = attackCoods[1];
 
-    while (this.hasHit(xpos, ypos)) {
-      xpos = Math.floor(Math.random() * 10);
-      ypos = Math.floor(Math.random() * 10);
-    }
     this.hits.push([xpos, ypos]);
-    gameboard.handleAttack(xpos, ypos);
+    if (gameboard.handleAttack(xpos, ypos)) {
+      this.seekmode = false;
+      pushToStackonHit(xpos, ypos);
+    }
   }
 
   hasHit(xpos: number, ypos: number) {

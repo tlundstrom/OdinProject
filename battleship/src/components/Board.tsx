@@ -14,17 +14,17 @@ export default function Board({ gameboard, owner, enemy, onCellClick }: IProps) 
     const cells = [];
     for (let i = 0; i < gameboard.board.length; i++) {
       for (let j = 0; j < gameboard.board[i].length; j++) {
-        const cell = gameboard.board[j][i];
+        const cell = gameboard.board[i][j];
         let status = "default";
         if (cell) {
           if (owner.name !== "cpu") status = "ship";
-          if (enemy.hasHit(j, i)) status = "hit";
+          if (enemy.hasHit(i, j)) status = "hit";
         } else {
-          if (gameboard.misses[j][i]) status = "miss";
+          if (gameboard.misses[i][j]) status = "miss";
         }
         let cellComp = <Cell></Cell>;
         if (owner.name === "cpu") {
-          cellComp = <Cell key={`${owner}[${i},${j}]`} status={status} owner={owner} onClick={() => onCellClick!(j, i)} />;
+          cellComp = <Cell key={`${owner}[${i},${j}]`} status={status} owner={owner} onClick={() => onCellClick!(i, j)} />;
         } else {
           cellComp = <Cell key={`${owner}[${i},${j}]`} status={status} owner={owner} />;
         }

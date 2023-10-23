@@ -18,15 +18,16 @@ class Ship {
   length: number;
   hits: number[];
   sunk: boolean;
-  id: string;
-  constructor(type: string) {
-    this.length = shipLengths[type as keyof IShipLengths];
+  name: string;
+  constructor(name: string) {
+    this.length = shipLengths[name as keyof IShipLengths];
     this.hits = [];
     this.sunk = false;
-    this.id = type;
+    this.name = name;
   }
 
   hit(position: number) {
+    console.log(position);
     if (this.hits.includes(position) || position < 0 || position > this.length) return;
     this.hits.push(position);
   }

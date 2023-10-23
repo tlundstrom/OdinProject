@@ -22,16 +22,16 @@ class Gameboard {
     }
   }
 
-  place(ship: Ship, row: number, col: number, vert: boolean) {
-    if (!this.isPossible(ship, row, col, vert)) return false;
+  place(ship: Ship, y: number, x: number, vert: boolean) {
+    if (!this.isPossible(ship, y, x, vert)) return false;
 
     if (vert) {
       for (let i = 0; i < ship.length; i++) {
-        this.board[row + i][col] = ship;
+        this.board[y + i][x] = ship;
       }
     } else {
       for (let i = 0; i < ship.length; i++) {
-        this.board[row][col + i] = ship;
+        this.board[y][x + i] = ship;
       }
     }
     return true;
@@ -55,48 +55,48 @@ class Gameboard {
     };
 
     while (placements < 5) {
-      const row = random();
-      const col = random();
+      const y = random();
+      const x = random();
       const vert = !!(random() % 2);
 
-      if (this.place(ships[placements], row, col, vert)) placements++;
+      if (this.place(ships[placements], y, x, vert)) placements++;
     }
   }
 
-  isPossible(ship: Ship, row: number, col: number, vert: boolean) {
-    if (row < 0 || row > boardSize - 1 || col < 0 || col > boardSize - 1) return false;
+  isPossible(ship: Ship, row: number, column: number, vert: boolean) {
+    if (row < 0 || row > boardSize - 1 || column < 0 || column > boardSize - 1) return false;
 
     if (vert) {
       if (row + ship.length > boardSize) return false;
     } else {
-      if (col + ship.length > boardSize) return false;
+      if (column + ship.length > boardSize) return false;
     }
 
     if (vert) {
-      for (let i = 0; i < Ship.length; i++) {
-        if (this.board[row + i][col]) return false;
+      for (let i = 0; i < ship.length; i++) {
+        if (this.board[row + i][column]) return false;
       }
     } else {
-      for (let i = 0; i < Ship.length; i++) {
-        if (this.board[row][col + i]) return false;
+      for (let i = 0; i < ship.length; i++) {
+        if (this.board[row][column + i]) return false;
       }
     }
 
     if (vert) {
-      for (let i = 0; i < Ship.length; i++) {
+      for (let i = 0; i < ship.length; i++) {
         for (let x = -1; x <= 1; x++) {
           for (let y = -1; y <= 1; y++) {
-            if (row + x + i < 0 || row + x + i >= boardSize || col + y < 0 || col + y >= boardSize) continue;
-            if (this.board[row + x + i][col + y]) return false;
+            if (row + x + i < 0 || row + x + i >= boardSize || column + y < 0 || column + y >= boardSize) continue;
+            if (this.board[row + x + i][column + y]) return false;
           }
         }
       }
     } else {
-      for (let i = 0; i < Ship.length; i++) {
+      for (let i = 0; i < ship.length; i++) {
         for (let x = -1; x <= 1; x++) {
           for (let y = -1; y <= 1; y++) {
-            if (row + x < 0 || row + x >= boardSize || col + y + i < 0 || col + y + i >= boardSize) continue;
-            if (this.board[row + x][col + y + i]) return false;
+            if (row + x < 0 || row + x >= boardSize || column + y + i < 0 || column + y + i >= boardSize) continue;
+            if (this.board[row + x][column + y + i]) return false;
           }
         }
       }
@@ -104,38 +104,39 @@ class Gameboard {
     return true;
   }
 
-  handleAttack(row: number, col: number) {
-    if (row < 0 || row >= boardSize || col < 0 || col >= boardSize) {
+  handleAttack(row: number, column: number) {
+    if (row < 0 || row >= boardSize || column < 0 || column >= boardSize) {
       return false;
     }
 
-    if (this.board[row][col]) {
+    if (this.board[row][column]) {
       let hitIndex = 0;
-      if (col > 0 && this.board[row][col - 1]) {
+      // is vertical
+      if (column > 0 && this.board[row][column - 1]) {
         let i = 1;
-        while (col - i >= 0 && this.board[row][col - i]) {
+        while (column - i >= 0 && this.board[row][column - i]) {
           hitIndex++;
           i++;
         }
-      } else if (row > 0 && this.board[row - 1][col]) {
+      } else if (row > 0 && this.board[row - 1][column]) {
         let i = 1;
-        while (row - i >= 0 && this.board[row - i][col]) {
+        while (row - i >= 0 && this.board[row - i][column]) {
           hitIndex++;
           i++;
         }
       }
-      this.board[row][col]?.hit(hitIndex);
+      this.board[row][column]?.hit(hitIndex);
       return true;
     } else {
-      this.misses[row][col] = true;
+      this.misses[row][column] = true;
       return false;
     }
   }
 
   handleGameOver() {
     let isBoardEmpty = true;
-    for (let i = 0; i < boardSize; i++) {
-      for (let j = 0; j < boardSize; j++) {
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
         if (this.board[i][j]) {
           isBoardEmpty = false;
           if (!this.board[i][j]?.isSunk()) {
@@ -144,6 +145,7 @@ class Gameboard {
         }
       }
     }
+    console.log(isBoardEmpty);
     return isBoardEmpty ? false : true;
   }
 
