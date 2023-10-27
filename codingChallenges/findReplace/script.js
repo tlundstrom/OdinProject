@@ -1,3 +1,8 @@
+const s = "abcd";
+const indices = [0, 2];
+const sources = ["a", "cd"];
+const targets = ["eee", "ffff"];
+
 const findReplaceString = function (s, indices, sources, targets) {
   let result = s.split("");
 
@@ -9,9 +14,11 @@ const findReplaceString = function (s, indices, sources, targets) {
     if (substring === source) {
       result[index] = target;
       for (let j = index + 1; j < source.length + index; j++) {
-        result[j] = null;
+        result[j] = "";
       }
     }
   }
-  return result.filter((res) => res !== null).join("");
+  return result.join("");
 };
+
+console.log(findReplaceString(s, indices, sources, targets));
