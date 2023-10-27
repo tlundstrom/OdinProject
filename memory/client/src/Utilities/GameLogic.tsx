@@ -14,7 +14,7 @@ export function handleGameOver(
   setDialog: (text: string) => void
 ) {
   setDialog(
-    compareScores(highScore, currentScore)
+    currentScore > highScore
       ? `You beat the highscore by ${currentScore - highScore}!
       Play Again?`
       : `You were ${highScore - currentScore} away from the high score! Try Again!`

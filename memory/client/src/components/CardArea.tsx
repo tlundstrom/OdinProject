@@ -70,7 +70,7 @@ export default function CardArea({ cards, stack, setStack, currentScore, setCurr
   }, [difficulty]);
 
   const getRandomCard = () => {
-    let number: number = Math.floor(Math.random() * 69) + 1;
+    let number: number = Math.floor(Math.random() * 69);
     return cards[number];
   };
   const buildDeck = () => {
