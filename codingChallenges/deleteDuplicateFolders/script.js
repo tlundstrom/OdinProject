@@ -7,14 +7,17 @@ class Node {
 
 function buildSubtreeToNodes(node, subTreeToNodes) {
   let subTree = "(";
-  for (const [s, child] of node.children.entries()) {
-    subTree += s + buildSubtreeToNodes(child, subTreeToNodes);
+  for (const [subDirectory, child] of node.children.entries()) {
+    subTree += subDirectory + buildSubtreeToNodes(child, subTreeToNodes);
   }
   subTree += ")";
+  console.log(subTree);
   if (subTree !== "()") {
     if (!subTreeToNodes.has(subTree)) subTreeToNodes.set(subTree, []);
     subTreeToNodes.get(subTree).push(node);
+    console.log(subTreeToNodes);
   }
+
   return subTree;
 }
 
@@ -34,6 +37,7 @@ function deleteDuplicateFolder(paths) {
   const pathArr = [];
   const subTreeToNodes = new Map();
   paths.sort();
+  console.log(JSON.stringify(paths));
 
   const root = new Node();
   for (const path of paths) {
@@ -55,7 +59,8 @@ function deleteDuplicateFolder(paths) {
   }
 
   constructPath(root, pathArr, ans);
+  console.log(pathArr);
   return ans;
 }
 
-console.log(deleteDuplicateFolder([["a"], ["c"], ["d"], ["a", "b"], ["c", "b"], ["d", "a"]]));
+console.log(JSON.stringify(deleteDuplicateFolder([["a"], ["c"], ["d"], ["a", "b"], ["c", "b"], ["d", "a"], ["d", "a", "x"], ["d", "a", "x", "b"]])));
