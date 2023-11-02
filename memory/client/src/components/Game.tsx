@@ -17,7 +17,6 @@ const Game = () => {
   useEffect(() => {
     fetchAndSetData();
   }, []);
-  console.log(cards);
   return (
     <div className="game-wrapper">
       <ScoreArea highScore={highScore} currentScore={currentScore} />
