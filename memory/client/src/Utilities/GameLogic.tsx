@@ -37,10 +37,9 @@ export function isGameOver(clickedId: string, stack: string[], difficulty: numbe
       } else {
         for (let i = stack.length - 1; i > stack.length - 11; i--) {
           if (clickedId === stack[i]) return true;
-          return false;
         }
+        return false;
       }
-      break;
     case 2:
       if (stack.length === 0) return false;
       if (stack.length < 15) {
@@ -51,10 +50,9 @@ export function isGameOver(clickedId: string, stack: string[], difficulty: numbe
       } else {
         for (let i = stack.length - 1; i > stack.length - 16; i--) {
           if (clickedId === stack[i]) return true;
-          return false;
         }
+        return false;
       }
-      break;
     case 3:
       if (stack.length === 0) return false;
       if (stack.length < 20) {
@@ -65,10 +63,9 @@ export function isGameOver(clickedId: string, stack: string[], difficulty: numbe
       } else {
         for (let i = stack.length - 1; i > stack.length - 21; i--) {
           if (clickedId === stack[i]) return true;
-          return false;
         }
+        return false;
       }
-      break;
     case 4:
       if (stack.length === 0) return false;
       if (stack.length < 25) {
@@ -79,10 +76,9 @@ export function isGameOver(clickedId: string, stack: string[], difficulty: numbe
       } else {
         for (let i = stack.length - 1; i > stack.length - 26; i--) {
           if (clickedId === stack[i]) return true;
-          return false;
         }
+        return false;
       }
-      break;
     case 5:
       if (stack.length === 0) return false;
       if (stack.length < 30) {
@@ -93,9 +89,8 @@ export function isGameOver(clickedId: string, stack: string[], difficulty: numbe
       } else {
         for (let i = stack.length - 1; i > stack.length - 31; i--) {
           if (clickedId === stack[i]) return true;
-          return false;
         }
+        return false;
       }
-      break;
   }
 }
