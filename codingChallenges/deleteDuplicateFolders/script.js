@@ -63,4 +63,4 @@ function deleteDuplicateFolder(paths) {
   return ans;
 }
 
-console.log(JSON.stringify(deleteDuplicateFolder([["a"], ["c"], ["d"], ["a", "b"], ["c", "b"], ["d", "a"], ["d", "a", "x"], ["d", "a", "x", "b"]])));
+console.log(JSON.stringify(deleteDuplicateFolder([["a"], ["c"], ["d"], ["a", "b"], ["c", "b"], ["d", "a"]])));
