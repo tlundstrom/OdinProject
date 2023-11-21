@@ -11,17 +11,7 @@ export function Navbar() {
         <Nav className="me-auto">
           <NavItem>
             <NavLink tag={ReactLink} to="/">
-              Home
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink tag={ReactLink} to="/store">
               Store
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink tag={ReactLink} to="/about">
-              About
             </NavLink>
           </NavItem>
         </Nav>

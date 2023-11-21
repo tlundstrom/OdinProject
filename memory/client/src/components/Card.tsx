@@ -43,6 +43,7 @@ export function Card({
 
     flipCard();
     if (isGameOver(card.id, stack, difficulty)) {
+      setStack([]);
       handleGameOver(currentScore, highScore, setCurrentScore, setHighScore, setGameStarted, setDialog);
     } else {
       setStack([...stack, card.id]);

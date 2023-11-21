@@ -12,7 +12,7 @@ interface IProps {
 export function ShoppingCart({ isOpen }: IProps) {
   const { closeCart, cartItems } = useShoppingCart();
   useEffect(() => {
-    if (cartItems.length === 0) {
+    if (cartItems.length === 0 && isOpen) {
       closeCart();
     }
   }, [cartItems]);
@@ -23,8 +23,8 @@ export function ShoppingCart({ isOpen }: IProps) {
         <ListGroup gap={3}>
           {cartItems.map((item) => {
             return (
-              <ListGroupItem>
-                <CartItem key={item.id} {...item} />
+              <ListGroupItem key={item.id}>
+                <CartItem {...item} />
               </ListGroupItem>
             );
           })}
