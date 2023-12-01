@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thomlund\\source\\repos\\Udemy\\CookieCookBook\\CookieCookBook.csproj": {}
+    "C:\\Users\\thomlund\\OdinProject\\CookieCookBook\\CookieCookBook.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thomlund\\source\\repos\\Udemy\\CookieCookBook\\CookieCookBook.csproj": {
+    "C:\\Users\\thomlund\\OdinProject\\CookieCookBook\\CookieCookBook.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thomlund\\source\\repos\\Udemy\\CookieCookBook\\CookieCookBook.csproj",
+        "projectUniqueName": "C:\\Users\\thomlund\\OdinProject\\CookieCookBook\\CookieCookBook.csproj",
         "projectName": "CookieCookBook",
-        "projectPath": "C:\\Users\\thomlund\\source\\repos\\Udemy\\CookieCookBook\\CookieCookBook.csproj",
+        "projectPath": "C:\\Users\\thomlund\\OdinProject\\CookieCookBook\\CookieCookBook.csproj",
         "packagesPath": "C:\\Users\\thomlund\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thomlund\\source\\repos\\Udemy\\CookieCookBook\\obj\\",
+        "outputPath": "C:\\Users\\thomlund\\OdinProject\\CookieCookBook\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thomlund\\AppData\\Roaming\\NuGet\\NuGet.Config",
